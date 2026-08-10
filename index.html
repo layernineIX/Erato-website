@@ -3,49 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ERATO — Design Studio</title>
-<meta name="description" content="ERATO — a clothing and accessories studio translating art history, cinema and Pop Art into wearable and collectible objects.">
+<title>ERATO</title>
+<meta name="description" content="ERATO — wearable art. Paintings, film stills and forgotten posters, worn instead of hung.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="home">
 
 <nav class="nav" id="nav">
-  <a href="#top" class="nav-logo">
-    <img src="assets/erato-logo.png" alt="ERATO">
-  </a>
+  <a href="index.html" class="nav-logo"><img src="assets/erato-logo.png" alt="ERATO"></a>
   <ul class="nav-links">
-    <li><a href="#collection">Shop</a></li>
-    <li><a href="#collection">Collections</a></li>
-    <li><a href="#concept">Concept</a></li>
-    <li><a href="#pillars">Accessories</a></li>
-    <li><a href="#journal">Journal</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="collections.html">Collections</a></li>
+    <li><a href="accessories.html">Accessories</a></li>
+    <li><a href="prints.html">Prints</a></li>
+    <li><a href="journal.html">Journal</a></li>
+    <li><a href="about.html">About</a></li>
   </ul>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#collection">Shop</a>
-  <a href="#collection">Collections</a>
-  <a href="#concept">Concept</a>
-  <a href="#pillars">Accessories</a>
-  <a href="#journal">Journal</a>
-  <a href="#about">About</a>
+  <a href="collections.html">Collections</a>
+  <a href="accessories.html">Accessories</a>
+  <a href="prints.html">Prints</a>
+  <a href="journal.html">Journal</a>
+  <a href="about.html">About</a>
 </div>
 
 <section class="hero" id="top">
-  <img class="hero-bg" src="assets/campaign/shot-f-colonnade.jpg" alt="ERATO campaign — colonnade">
+  <video class="hero-video" autoplay muted loop playsinline poster="assets/video/hero-poster.jpg">
+    <source src="assets/video/hero-loop.mp4" type="video/mp4">
+  </video>
   <div class="hero-scrim"></div>
   <div class="hero-content">
-    <p class="eyebrow">Erato Design Studio</p>
+    <p class="eyebrow">ERATO</p>
     <img class="wordmark" src="assets/erato-logo.png" alt="ERATO">
-    <h1>ERATO is a clothing and accessories studio — art history, staged as fashion.</h1>
-    <a href="#collection" class="btn">View the Collection</a>
+    <h1>We took the art off the wall and gave it somewhere to go.</h1>
+    <a href="collections.html" class="btn">Enter the Collection</a>
   </div>
   <div class="scroll-cue">
     <span class="line"></span>
@@ -55,20 +51,20 @@
 
 <div class="marquee">
   <div class="marquee-track">
-    <span>ART HISTORY</span><span>·</span><span>POP ART</span><span>·</span><span>CINEMA</span><span>·</span><span>PHOTOGRAPHY</span><span>·</span>
-    <span>ART HISTORY</span><span>·</span><span>POP ART</span><span>·</span><span>CINEMA</span><span>·</span><span>PHOTOGRAPHY</span><span>·</span>
+    <span>PAINTING</span><span>·</span><span>POP ART</span><span>·</span><span>CINEMA</span><span>·</span><span>PHOTOGRAPHY</span><span>·</span>
+    <span>PAINTING</span><span>·</span><span>POP ART</span><span>·</span><span>CINEMA</span><span>·</span><span>PHOTOGRAPHY</span><span>·</span>
   </div>
 </div>
 
 <section class="manifesto" id="concept">
-  <p class="reveal">We take the paintings, the film stills, the sculpture halls and the pop-art archives — and we stage them again, on cloth. ERATO is not a streetwear label. It's a design studio that treats a T-shirt like a canvas and a print like an object worth keeping.</p>
+  <p class="reveal">ERATO doesn't hang things on walls. We put them on bodies. Every piece starts as an image worth stealing — a painting, a film still, a forgotten poster — and ends as something you actually wear.</p>
 </section>
 
 <section class="pillars" id="pillars">
   <div class="pillar reveal">
     <div class="swatch p1"></div>
-    <h3>Art History</h3>
-    <p>Renaissance portraiture, classical sculpture, the museum hall reimagined as a runway.</p>
+    <h3>Painting</h3>
+    <p>Court scenes and old canvases, lifted straight off the page.</p>
   </div>
   <div class="pillar reveal">
     <div class="swatch p2"></div>
@@ -90,63 +86,64 @@
 <section class="collection" id="collection">
   <h2 class="reveal">The Collection</h2>
   <div class="shots-grid">
-    <div class="shot-card reveal">
-      <img class="field" src="assets/campaign/shot-a-hero.jpg" alt="Shot A — Hero">
-      <div class="meta"><span class="tag">Shot A</span><h4>Hero</h4></div>
-    </div>
-    <div class="shot-card reveal">
-      <img class="field" src="assets/campaign/shot-b-cinema.jpg" alt="Shot B — Cinema Cut">
-      <div class="meta"><span class="tag">Shot B</span><h4>Cinema Cut</h4></div>
-    </div>
-    <div class="shot-card reveal">
-      <img class="field" src="assets/campaign/shot-c-object.jpg" alt="Shot C — Object">
-      <div class="meta"><span class="tag">Shot C</span><h4>Object</h4></div>
-    </div>
-    <div class="shot-card reveal">
-      <img class="field" src="assets/campaign/shot-d-reinterpretation.jpg" alt="Shot D — Reinterpretation">
-      <div class="meta"><span class="tag">Shot D</span><h4>Reinterpretation</h4></div>
-    </div>
-    <div class="shot-card reveal">
-      <img class="field" src="assets/campaign/shot-e-print.jpg" alt="Shot E — Print">
-      <div class="meta"><span class="tag">Shot E</span><h4>Print</h4></div>
-    </div>
+    <a class="shot-card reveal" href="collections.html">
+      <img class="field" src="assets/products/the-court.jpg" alt="The Court — ERATO t-shirt">
+      <div class="meta"><span class="tag">T-Shirt · RM 169</span><h4>The Court</h4></div>
+    </a>
+    <a class="shot-card reveal" href="collections.html">
+      <img class="field" src="assets/products/strange-and-beautiful.jpg" alt="Strange & Beautiful — ERATO t-shirt">
+      <div class="meta"><span class="tag">T-Shirt · RM 169</span><h4>Strange &amp; Beautiful</h4></div>
+    </a>
+    <a class="shot-card reveal" href="collections.html">
+      <img class="field" src="assets/products/eden.jpg" alt="Eden — ERATO t-shirt">
+      <div class="meta"><span class="tag">T-Shirt · RM 169</span><h4>Eden</h4></div>
+    </a>
+    <a class="shot-card reveal" href="collections.html">
+      <img class="field" src="assets/products/after-hours.jpg" alt="After Hours — ERATO t-shirt">
+      <div class="meta"><span class="tag">T-Shirt · RM 169</span><h4>After Hours</h4></div>
+    </a>
+    <a class="shot-card reveal" href="accessories.html">
+      <img class="field" src="assets/products/marble-study-tote.jpg" alt="Marble Study — ERATO tote">
+      <div class="meta"><span class="tag">Tote · RM 69</span><h4>Marble Study</h4></div>
+    </a>
   </div>
 </section>
 
 <section class="split">
-  <div class="split-half dark reveal"><h3>A design studio</h3></div>
+  <div class="split-half dark reveal"><h3>Wearable art</h3></div>
   <div class="split-half light reveal"><h3>Not a streetwear label</h3></div>
 </section>
 
 <section class="about" id="about">
-  <img class="frame reveal" src="assets/campaign/shot-a2-hero-variant.jpg" alt="ERATO — About">
+  <img class="frame reveal" src="assets/campaign/shot-a2-hero-variant.jpg" alt="ERATO">
   <div class="about-copy reveal">
     <h2>About ERATO</h2>
-    <p>ERATO is a clothing and accessories studio built around one idea: art history is not something you hang on a wall — it's something you can wear. Every piece starts as a reference — a painting, a film still, a sculpture — and ends as a T-shirt, a print, an object you keep.</p>
-    <p>No trends. No mascots. Just the archive, staged as fashion.</p>
+    <p>ERATO is a brand built around one idea: the images worth keeping shouldn't be stuck on a wall. Every piece starts as a reference — a painting, a film still, a forgotten poster — and ends as a T-shirt, a print, an object you keep.</p>
+    <p>No trends. No mascots. Just the image, worn.</p>
+    <a href="about.html" class="btn" style="border-color:var(--ink);color:var(--ink);">Read More</a>
   </div>
 </section>
 
 <section class="journal" id="journal">
   <h2 class="reveal">Journal</h2>
   <div class="journal-grid">
-    <div class="journal-card reveal">
+    <a class="journal-card reveal" href="journal.html">
       <span class="tag">Field Notes</span>
       <h4>Why we shoot like it's cinema</h4>
-    </div>
-    <div class="journal-card reveal">
+    </a>
+    <a class="journal-card reveal" href="journal.html">
       <span class="tag">Field Notes</span>
       <h4>The archive as material</h4>
-    </div>
-    <div class="journal-card reveal">
+    </a>
+    <a class="journal-card reveal" href="journal.html">
       <span class="tag">Field Notes</span>
       <h4>Building a print, not a graphic</h4>
-    </div>
+    </a>
   </div>
 </section>
 
 <section class="join">
-  <h2 class="reveal">Join the studio list</h2>
+  <h2 class="reveal">Join the list</h2>
   <p class="reveal">New drops, print releases, and the occasional field note. No noise.</p>
   <form class="join-form reveal" id="joinForm">
     <input type="email" placeholder="Your email" required>
@@ -157,12 +154,12 @@
 <footer class="footer">
   <img src="assets/erato-logo.png" alt="ERATO" class="footer-logo">
   <ul class="footer-links">
-    <li><a href="#collection">Shop</a></li>
-    <li><a href="#concept">Concept</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#journal">Journal</a></li>
+    <li><a href="collections.html">Collections</a></li>
+    <li><a href="accessories.html">Accessories</a></li>
+    <li><a href="prints.html">Prints</a></li>
+    <li><a href="about.html">About</a></li>
   </ul>
-  <p class="copyright">© 2026 ERATO Design Studio. All rights reserved.</p>
+  <p class="copyright">© 2026 ERATO. All rights reserved.</p>
 </footer>
 
 <script src="js/main.js"></script>

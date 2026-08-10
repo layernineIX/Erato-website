@@ -32,6 +32,21 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 revealEls.forEach(el => observer.observe(el));
 
+// Product piece — size / print-size selectors
+document.querySelectorAll('.piece, .piece-solo').forEach(piece => {
+  const buttons = piece.querySelectorAll('.size-btn');
+  const priceEl = piece.querySelector('.plaque-price');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (btn.dataset.price && priceEl) {
+        priceEl.textContent = 'RM ' + btn.dataset.price;
+      }
+    });
+  });
+});
+
 // Newsletter form (in-memory only, no backend yet)
 const joinForm = document.getElementById('joinForm');
 if (joinForm) {
