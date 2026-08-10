@@ -114,9 +114,9 @@ body.home .nav.scrolled .nav-toggle span{background:var(--ink);}
   opacity:.85;margin-bottom:18px;
 }
 .hero .wordmark{
-  height:46px;
+  height:78px;
   filter:brightness(0) invert(1);
-  margin-bottom:22px;
+  margin-bottom:30px;
 }
 .hero h1{
   font-size:clamp(24px,3.4vw,42px);
@@ -380,4 +380,47 @@ body.home .nav.scrolled .nav-toggle span{background:var(--ink);}
   .page-hero{padding:140px 24px 40px;}
   .pieces-grid{padding:16px 24px 90px;}
   .piece-solo{grid-template-columns:1fr;padding:16px 24px 90px;}
+}
+
+/* ---------- CLICKABLE PREVIEW CARDS (grid -> detail page) ---------- */
+a.piece{text-decoration:none;color:inherit;display:flex;}
+.piece .plaque-preview{border-top:2px solid var(--ink);padding-top:16px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+.piece .plaque-preview h3{font-size:18px;font-weight:400;}
+.piece .plaque-preview .price{font-size:14px;opacity:.7;white-space:nowrap;}
+.piece .view-hint{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.45;margin-top:6px;}
+
+/* ---------- PRODUCT DETAIL PAGE ---------- */
+.back-link{
+  display:block;padding:148px 48px 0;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.55;
+  transition:opacity .25s;
+}
+.back-link:hover{opacity:1;}
+.product-detail{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;
+  padding:28px 48px 20px;align-items:start;
+}
+.product-detail .piece-frame{aspect-ratio:4/5;margin-bottom:0;}
+.product-detail .plaque{padding-top:0;border-top:none;}
+.product-detail .plaque-title{font-size:26px;margin-bottom:8px;}
+.product-detail .plaque-medium{font-size:13px;margin-bottom:20px;}
+.product-detail .plaque-price{font-size:20px;margin-bottom:26px;}
+.add-to-bag{
+  display:inline-block;padding:15px 36px;
+  background:var(--ink);color:var(--paper);border:none;
+  font-family:var(--font);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  cursor:pointer;transition:opacity .3s var(--ease);
+}
+.add-to-bag:hover{opacity:.82;}
+.product-story{padding:56px 48px 130px;max-width:760px;border-top:1px solid var(--line);margin:0 48px;}
+.product-story h4{
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;
+  margin-top:40px;margin-bottom:16px;
+}
+.product-story p{font-size:15px;line-height:1.85;opacity:.85;}
+
+@media (max-width:900px){
+  .back-link{padding:120px 24px 0;}
+  .product-detail{grid-template-columns:1fr;padding:20px 24px 10px;}
+  .product-story{padding:40px 24px 90px;margin:0 24px;}
 }
