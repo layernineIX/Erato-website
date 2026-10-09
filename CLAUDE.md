@@ -1,7 +1,7 @@
 # ERATO website — handoff notes
 
 Static HTML/CSS/JS site (no build step). Repo: layernineIX/Erato-website. Push to `main` → Cloudflare Workers deploys. NOT Shopify.
-Owner: Ali (Layer Nine / ERATO). Currency: USD. Tees USD 44, totes USD 24, prints A4 19 / A3 29 / A2 49 / A1 69 (placeholders).
+Owner: Ali (Layer Nine / ERATO). Currency: USD. Tees USD 44, totes USD 24, prints A4 29 / A3 39 / A2 52 / A1 68 (set by Ali).
 
 ## Rules
 - Keep Jost font and CSS variables in css/styles.css (warm tokens --plaster, --wood, --terra, --teal added at the bottom "SYNC" block).
