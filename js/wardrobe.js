@@ -17,7 +17,7 @@
     { k:'wave',       slug:'kanagawa',      name:'Kanagawa',        col:'Washed Charcoal', tone:'light' }
   ].map(t => Object.assign(t, { group:'tees', meta: t.col + ' \u00b7 USD 44', ar: 0.711, alt: t.name + ' t-shirt, back' }));
   const ITEMS = TEES.concat([
-    { k:'shoes', slug:'loom',         name:'Loom',         col:'Mule', tone:'light', group:'floor', meta:'Woven leather mule \u00b7 USD 89', ar:1.32, alt:'Loom woven leather mules' },
+    { k:'shoes', slug:'loom',         name:'Loom',         col:'Mule', tone:'light', group:'shelf', meta:'Woven leather mule \u00b7 USD 89', ar:1.32, alt:'Loom woven leather mules' },
     { k:'tote',  slug:'marble-study', name:'Marble Study', col:'Tote', tone:'dark',  group:'shelf', meta:'Canvas tote \u00b7 USD 24', ar:0.64, alt:'Marble Study tote bag' }
   ]);
   const href = t => 'product-' + t.slug + '.html';
@@ -25,7 +25,7 @@
   // zoom frames: centre (fraction of world) and region size (fraction of world width / height)
   const GROUPS = {
     tees:  { cx: 0.4784, cy: 0.3658, rw: 0.174, rh: 0.287 },
-    shelf: { cx: 0.4850, cy: 0.5500, rw: 0.200, rh: 0.300 },
+    shelf: { cx: 0.4850, cy: 0.5800, rw: 0.200, rh: 0.300 },
     floor: { cx: 0.4850, cy: 0.7150, rw: 0.200, rh: 0.300 }
   };
 
