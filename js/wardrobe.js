@@ -5,8 +5,8 @@
   const tag = $('wrTag'), back = $('wrBack'), idx = $('wrIndex'), openHit = $('wrOpenHit');
   const pull = $('wrPull'), pullTee = $('wrPullTee'), pullImg = $('wrPullImg');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const ASPECT = 1856 / 2304;
-  const RACK = { x: 0.29095, y: 0.16493, w: 0.42026, h: 0.48611 };
+  const ASPECT = 16 / 9;
+  const RACK = { x: 0.38542, y: 0.17593, w: 0.19792, h: 0.46296 };
 
   const TEES = [
     { k:'horse',      slug:'caparison',     name:'Caparison',       col:'Bone', tone:'dark' },
@@ -19,15 +19,13 @@
   ];
   const href = t => 'product-' + t.slug + '.html';
 
+  const WARDROBE_CX = 0.49;
   let state = 'room';       // room -> rack
   let hot = -1, W = 0, H = 0, vw = 0, vh = 0, hasClosed = false;
   const mobile = () => matchMedia('(max-width:900px)').matches;
 
-  // closed-door frame is optional
   const closedImg = $('wrClosed');
-  const probe = new Image();
-  probe.onload = () => { hasClosed = true; closedImg.hidden = false; };
-  probe.src = 'assets/hero/room-closed.jpg';
+  hasClosed = true;
 
   // layers
   const layerEls = TEES.map((t, i) => {
@@ -70,13 +68,16 @@
     let s, tx, ty;
     if (state === 'rack') {
       // frame the rail of t-shirts (rack fractions x .04-.96, y .08-.70)
-      const rw = RACK.w * W * 0.92, rh = RACK.h * H * 0.62;
+      const rw = RACK.w * W * 0.88, rh = RACK.h * H * 0.62;
       s = Math.min(vw / rw * 0.94, vh / rh * 0.88);
-      const cxp = (RACK.x + RACK.w * 0.5) * W, cyp = (RACK.y + RACK.h * 0.40) * H;
+      const cxp = (RACK.x + RACK.w * 0.47) * W, cyp = (RACK.y + RACK.h * 0.41) * H;
       tx = vw / 2 - cxp * s; ty = vh * 0.5 - cyp * s + vh * 0.02;
     } else {
-      s = 1; tx = (vw - W) / 2; ty = 0;
-      if (mobile()) { s = 1; tx = (vw - W) / 2; }
+      s = 1; ty = 0;
+      tx = vw / 2 - WARDROBE_CX * W * s;
+      if (W <= vw) tx = (vw - W) / 2;
+      else tx = Math.min(0, Math.max(vw - W, tx));
+      if (mobile()) { s = 1.0; tx = vw / 2 - WARDROBE_CX * W * s; }
     }
     world.style.transform = `translate(${tx}px,${ty}px) scale(${s})`;
   };
@@ -92,8 +93,11 @@
       apply();
     };
     if (hasClosed && !closedImg.classList.contains('gone')) {
-      closedImg.classList.add('gone'); world.classList.add('opened');
-      setTimeout(run, reduce ? 0 : 1100);
+      world.classList.add('opened');
+      if (reduce) { closedImg.classList.add('gone'); run(); return; }
+      closedImg.classList.add('opening'); void closedImg.offsetWidth;
+      closedImg.classList.add('gone');
+      setTimeout(run, 1150);
     } else run();
   };
   const goRoom = () => {
@@ -102,7 +106,7 @@
     world.classList.remove('zoomed', 'opened', 'picking');
     stage.classList.remove('inside');
     back.hidden = true; idx.hidden = true; setHot(-1);
-    if (hasClosed) closedImg.classList.remove('gone');
+    if (hasClosed) { closedImg.classList.remove('gone'); setTimeout(() => closedImg.classList.remove('opening'), 700); }
     apply();
   };
 
@@ -110,7 +114,7 @@
   const inDoors = (x, y) => {
     const r = world.getBoundingClientRect();
     const u = (x - r.left) / r.width, v = (y - r.top) / r.height;
-    return u > 0.17 && u < 0.73 && v > 0.09 && v < 0.75;
+    return u > 0.34 && u < 0.65 && v > 0.12 && v < 0.88;
   };
   const setHot = i => {
     if (i === hot) return; hot = i;
