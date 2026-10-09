@@ -780,7 +780,7 @@ h2{font-weight:400;}
 .display span{font-family:var(--font);font-weight:300;font-size:.42em;letter-spacing:.34em;text-transform:uppercase;vertical-align:.55em;margin-right:.2em;}
 .display em{font-style:italic;font-weight:400;font-size:1.15em;color:var(--terra);letter-spacing:-.02em;}
 .display .d2{display:inline-block;margin-top:.12em;font-family:"Bodoni Moda","Didot",Georgia,serif;font-size:.78em;font-weight:400;letter-spacing:.005em;text-transform:none;vertical-align:baseline;margin-right:0;}
-.intro-photo img{aspect-ratio:4/5;object-position:52% 50%;}
+.intro-photo img{aspect-ratio:4/5;object-position:50% 50%;}
 
 /* night palette: replaces the brown on the join band and footer */
 :root{--night:#1a1640;--night2:#262057;}
