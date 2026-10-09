@@ -38,7 +38,7 @@ document.querySelectorAll('.piece, .piece-solo, .product-detail').forEach(piece 
   const priceEl = piece.querySelector('.plaque-price');
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
+      btn.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       if (btn.dataset.price && priceEl) {
         priceEl.textContent = 'USD ' + btn.dataset.price;

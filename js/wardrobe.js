@@ -17,17 +17,18 @@
     { k:'wave',       slug:'kanagawa',      name:'Kanagawa',        col:'Washed Charcoal', tone:'light' }
   ].map(t => Object.assign(t, { group:'tees', meta: t.col + ' \u00b7 USD 44', ar: 0.711, alt: t.name + ' t-shirt, back' }));
   const ITEMS = TEES.concat([
-    { k:'shoes', slug:'loom',         name:'Loom',         col:'Mule', tone:'light', group:'shelf', meta:'Handmade Balinese leather \u00b7 USD 220', ar:1.32, alt:'Loom woven leather mules' },
+    { k:'shoes', slug:'loom',         name:'Loom',         col:'Mule', tone:'light', group:'shelf', meta:'100% natural leather, handmade \u00b7 USD 275', ar:1.32, alt:'Loom woven leather mules' },
     { k:'tote',  slug:'marble-study', name:'Marble Study', col:'Tote', tone:'dark',  group:'floor', meta:'100% cotton tote \u00b7 USD 18', ar:0.543, alt:'Marble Study tote bag' },
-    { k:'print', slug:'riviera', name:'Riviera', col:'Print', tone:'light', group:'floor', meta:'Framed print \u00b7 from USD 59', ar:0.726, alt:'Riviera framed print' }
+    { k:'print', slug:'riviera', name:'Riviera', col:'Print', tone:'light', group:'floor', meta:'Framed print \u00b7 from USD 59', ar:0.726, alt:'Riviera framed print' },
+    { k:'bag', slug:'courier', name:'Courier', col:'Bag', tone:'light', group:'shelf', meta:'Handmade leather briefcase \u00b7 USD 320', ar:0.920, alt:'Courier black leather briefcase' }
   ]);
   const href = t => 'product-' + t.slug + '.html';
   const RACK = { x: 0.38542, y: 0.17593, w: 0.19792, h: 0.61574 };
   // zoom frames: centre (fraction of world) and region size (fraction of world width / height)
   const GROUPS = {
     tees:  { cx: 0.4784, cy: 0.3658, rw: 0.174, rh: 0.287 },
-    shelf: { cx: 0.4850, cy: 0.6700, rw: 0.200, rh: 0.250 },
-    floor: { cx: 0.4850, cy: 0.6700, rw: 0.200, rh: 0.250 }
+    shelf: { cx: 0.4850, cy: 0.6550, rw: 0.200, rh: 0.280 },
+    floor: { cx: 0.4850, cy: 0.6550, rw: 0.200, rh: 0.280 }
   };
 
   const WARDROBE_CX = 0.49;
@@ -66,7 +67,7 @@
     const u = (clientX - r.left) / r.width, v = (clientY - r.top) / r.height;
     if (u < 0 || v < 0 || u > 1 || v > 1) return -1;
     const px = cx.getImageData(Math.min(cv.width-1, Math.floor(u*cv.width)), Math.min(cv.height-1, Math.floor(v*cv.height)), 1, 1).data[0];
-    return Math.round(px / 25) - 1;
+    return Math.round(px / 23) - 1;
   };
 
   // geometry
