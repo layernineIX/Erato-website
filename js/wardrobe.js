@@ -18,9 +18,9 @@
   ].map(t => Object.assign(t, { group:'tees', meta: t.col + ' \u00b7 USD 44', ar: 0.711, alt: t.name + ' t-shirt, back' }));
   const ITEMS = TEES.concat([
     { k:'shoes', slug:'loom',         name:'Loom',         col:'Mule', tone:'light', group:'shelf', meta:'100% natural leather, handmade \u00b7 USD 275', ar:1.32, alt:'Loom woven leather mules' },
-    { k:'tote',  slug:'marble-study', name:'Marble Study', col:'Tote', tone:'dark',  group:'floor', meta:'100% cotton tote \u00b7 USD 18', ar:0.543, alt:'Marble Study tote bag' },
+    { k:'tote',  slug:'scheherazade', name:'Sch\u00e9h\u00e9razade', col:'Tote', tone:'light', group:'floor', meta:'100% cotton tote \u00b7 USD 18', ar:0.634, alt:'Sch\u00e9h\u00e9razade cotton tote bag' },
     { k:'print', slug:'riviera', name:'Riviera', col:'Print', tone:'light', group:'floor', meta:'Framed print \u00b7 from USD 59', ar:0.726, alt:'Riviera framed print' },
-    { k:'bag', slug:'courier', name:'Courier', col:'Bag', tone:'light', group:'shelf', meta:'Handmade leather briefcase \u00b7 USD 320', ar:0.920, alt:'Courier black leather briefcase' }
+    { k:'bag', slug:'courier', name:'Courier', col:'Bag', tone:'light', group:'shelf', meta:'Handmade leather briefcase \u00b7 USD 320', ar:1.0, alt:'Courier black leather briefcase, four views' }
   ]);
   const href = t => 'product-' + t.slug + '.html';
   const RACK = { x: 0.38542, y: 0.17593, w: 0.19792, h: 0.61574 };
