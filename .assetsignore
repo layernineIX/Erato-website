@@ -1,0 +1,7 @@
+.git
+.gitignore
+node_modules
+CLAUDE.md
+README.md
+hf_*.png
+erato-website 2
