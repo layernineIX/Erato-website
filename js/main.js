@@ -66,3 +66,13 @@ if (joinForm) {
     input.placeholder = "You're on the list.";
   });
 }
+
+// Product gallery thumbnails
+document.querySelectorAll('.thumbs').forEach(group => {
+  const main = document.getElementById('mainShot');
+  group.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => {
+    group.querySelectorAll('.thumb').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    if (main) main.src = t.dataset.src;
+  }));
+});

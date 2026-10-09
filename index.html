@@ -32,21 +32,49 @@
   <a href="about.html">About</a>
 </div>
 
-<section class="hero" id="top">
-  <video class="hero-video" autoplay muted loop playsinline poster="assets/video/hero-poster.jpg">
-    <source src="assets/video/hero-loop.mp4" type="video/mp4">
-  </video>
-  <div class="hero-scrim"></div>
-  <div class="hero-content">
-    <img class="wordmark" src="assets/erato-logo.png" alt="ERATO">
-    <h1>We took the art off the wall and gave it somewhere to go.</h1>
-    <a href="collections.html" class="btn">Enter the Collection</a>
+<a class="skip-shop" href="#collection">Skip to shop</a>
+
+<section class="wardrobe" id="top" aria-label="The ERATO wardrobe">
+  <div class="wr-backdrop" id="wrBackdrop"></div>
+  <div class="wr-stage" id="wrStage">
+    <div class="wr-world" id="wrWorld">
+      <img class="wr-img wr-room" src="assets/hero/room-open.jpg" alt="A painted wardrobe in a sunlit room, its doors open, with t-shirts hanging inside" draggable="false">
+      <img class="wr-img wr-closed" id="wrClosed" src="assets/hero/room-closed.jpg" alt="" draggable="false" hidden>
+      <div class="wr-rack" id="wrRack">
+        <img class="wr-rackimg" src="assets/hero/rack.jpg" alt="" draggable="false">
+        <div class="wr-layers" id="wrLayers"></div>
+      </div>
+      <button class="wr-open-hit" id="wrOpenHit" aria-label="Open the wardrobe"></button>
+      <div class="wr-touchhint" id="wrTouchHint" aria-hidden="true"><span class="dot"></span><span>open me</span></div>
+    </div>
+    <div class="wr-top-scrim"></div>
+    <div class="wr-bottom-scrim"></div>
+    <div class="wr-copy" id="wrCopy">
+      <h1>We took the art off the wall and gave it somewhere to go.</h1>
+      <a href="collections.html" class="btn">Enter the Collection</a>
+    </div>
+    <div class="wr-tag" id="wrTag" aria-hidden="true">open me</div>
+    <button class="wr-back" id="wrBack" hidden>&larr; The wardrobe</button>
+    <ul class="wr-index" id="wrIndex" aria-label="The seven t-shirts" hidden></ul>
+    <div class="scroll-cue"><span class="line"></span><span>Scroll</span></div>
   </div>
-  <div class="scroll-cue">
-    <span class="line"></span>
-    <span>Scroll</span>
+
+  <div class="wr-pull" id="wrPull" role="dialog" aria-modal="true" aria-label="T-shirt" hidden>
+    <button class="wr-pull-close" id="wrPullClose" aria-label="Close">&times;</button>
+    <button class="wr-pull-nav prev" id="wrPrev" aria-label="Previous t-shirt">&lsaquo;</button>
+    <button class="wr-pull-nav next" id="wrNext" aria-label="Next t-shirt">&rsaquo;</button>
+    <a class="wr-pull-tee" id="wrPullTee" href="#"><img id="wrPullImg" src="" alt=""></a>
+    <div class="wr-pull-info">
+      <h2 id="wrPullName"></h2>
+      <p id="wrPullMeta"></p>
+      <div class="wr-pull-btns">
+        <a class="wr-btn solid" id="wrBuy" href="#">Buy me</a>
+        <a class="wr-btn" id="wrKnow" href="#">Know me better</a>
+      </div>
+    </div>
   </div>
 </section>
+<script>window.WR_META={"horse": {"i": 0, "x": 0.06282051282051282, "y": 0.1392857142857143, "w": 0.3557692307692308, "h": 0.5290178571428571}, "mughal": {"i": 1, "x": 0.15064102564102563, "y": 0.1392857142857143, "w": 0.3564102564102564, "h": 0.5102678571428572}, "roses": {"i": 2, "x": 0.23653846153846153, "y": 0.1392857142857143, "w": 0.3564102564102564, "h": 0.5285714285714286}, "budapest": {"i": 3, "x": 0.3243589743589744, "y": 0.1392857142857143, "w": 0.35705128205128206, "h": 0.5102678571428572}, "nighthawks": {"i": 4, "x": 0.4096153846153846, "y": 0.1392857142857143, "w": 0.35705128205128206, "h": 0.5285714285714286}, "vertigo": {"i": 5, "x": 0.4967948717948718, "y": 0.1392857142857143, "w": 0.35705128205128206, "h": 0.5102678571428572}, "wave": {"i": 6, "x": 0.5833333333333334, "y": 0.1392857142857143, "w": 0.35705128205128206, "h": 0.5102678571428572}};</script>
 
 <div class="marquee">
   <div class="marquee-track">
@@ -162,5 +190,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/wardrobe.js"></script>
 </body>
 </html>
