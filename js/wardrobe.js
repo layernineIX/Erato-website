@@ -9,13 +9,13 @@
   const RACK = { x: 0.29095, y: 0.16493, w: 0.42026, h: 0.48611 };
 
   const TEES = [
-    { k:'horse',      slug:'carpet-horse',  name:'Carpet Horse',    col:'Bone', tone:'dark' },
-    { k:'mughal',     slug:'mughal-letter', name:'Mughal Letter',   col:'Washed Charcoal', tone:'light' },
-    { k:'roses',      slug:'rose-garden',   name:'Rose Garden',     col:'Bone', tone:'dark' },
-    { k:'budapest',   slug:'budapest',      name:'Budapest',        col:'Washed Charcoal', tone:'light' },
-    { k:'nighthawks', slug:'nighthawks',    name:'Nighthawks',      col:'Bone', tone:'dark' },
-    { k:'vertigo',    slug:'vertigo',       name:'Vertigo',         col:'Washed Charcoal', tone:'light' },
-    { k:'wave',       slug:'the-wave',      name:'The Wave',        col:'Washed Charcoal', tone:'light' }
+    { k:'horse',      slug:'caparison',     name:'Caparison',       col:'Bone', tone:'dark' },
+    { k:'mughal',     slug:'illuminated',   name:'Illuminated',     col:'Washed Charcoal', tone:'light' },
+    { k:'roses',      slug:'bloom',         name:'Bloom',           col:'Bone', tone:'dark' },
+    { k:'budapest',   slug:'concierge',     name:'Concierge',       col:'Washed Charcoal', tone:'light' },
+    { k:'nighthawks', slug:'last-call',     name:'Last Call',       col:'Bone', tone:'dark' },
+    { k:'vertigo',    slug:'jade-room',     name:'Jade Room',       col:'Washed Charcoal', tone:'light' },
+    { k:'wave',       slug:'kanagawa',      name:'Kanagawa',        col:'Washed Charcoal', tone:'light' }
   ];
   const href = t => 'product-' + t.slug + '.html';
 
@@ -163,7 +163,7 @@
     document.body.classList.toggle('wr-light', t.tone === 'light' && !pull.hidden);
     pullImg.src = `assets/hero/pull-${t.k}.webp`; pullImg.alt = t.name + ' t-shirt, back';
     $('wrPullName').textContent = t.name;
-    $('wrPullMeta').textContent = t.col + ' · RM 169';
+    $('wrPullMeta').textContent = t.col + ' · USD 44';
     pullTee.href = $('wrBuy').href = $('wrKnow').href = href(t);
     pullTee.setAttribute('aria-label', t.name + ' — view product');
   };
