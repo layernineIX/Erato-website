@@ -41,7 +41,7 @@ document.querySelectorAll('.piece, .piece-solo').forEach(piece => {
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       if (btn.dataset.price && priceEl) {
-        priceEl.textContent = 'RM ' + btn.dataset.price;
+        priceEl.textContent = 'USD ' + btn.dataset.price;
       }
     });
   });
