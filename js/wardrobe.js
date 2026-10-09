@@ -17,8 +17,8 @@
     { k:'wave',       slug:'kanagawa',      name:'Kanagawa',        col:'Washed Charcoal', tone:'light' }
   ].map(t => Object.assign(t, { group:'tees', meta: t.col + ' \u00b7 USD 44', ar: 0.711, alt: t.name + ' t-shirt, back' }));
   const ITEMS = TEES.concat([
-    { k:'shoes', slug:'loom',         name:'Loom',         col:'Mule', tone:'light', group:'shelf', meta:'Woven leather mule \u00b7 USD 89', ar:1.32, alt:'Loom woven leather mules' },
-    { k:'tote',  slug:'marble-study', name:'Marble Study', col:'Tote', tone:'dark',  group:'shelf', meta:'Canvas tote \u00b7 USD 24', ar:0.64, alt:'Marble Study tote bag' }
+    { k:'shoes', slug:'loom',         name:'Loom',         col:'Mule', tone:'light', group:'shelf', meta:'Handmade Balinese leather \u00b7 USD 220', ar:1.32, alt:'Loom woven leather mules' },
+    { k:'tote',  slug:'marble-study', name:'Marble Study', col:'Tote', tone:'dark',  group:'shelf', meta:'100% cotton tote \u00b7 USD 18', ar:0.543, alt:'Marble Study tote bag' }
   ]);
   const href = t => 'product-' + t.slug + '.html';
   const RACK = { x: 0.38542, y: 0.17593, w: 0.19792, h: 0.61574 };

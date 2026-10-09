@@ -685,3 +685,4 @@ body{background:var(--paper);color:var(--wood);}
 .rail-wrap .rail-btn.prev{left:20px;} .rail-wrap .rail-btn.next{right:20px;}
 .rail-wrap .rail-btn:disabled{opacity:0;pointer-events:none;}
 @media (max-width:900px){.rail-wrap .rail-btn{display:flex;width:44px;height:44px;font-size:18px;align-items:center;justify-content:center;top:calc(50% - 40px);}.rail-wrap .rail-btn.prev{left:8px}.rail-wrap .rail-btn.next{right:8px}}
+button.swatch-dot{cursor:pointer;padding:0;}

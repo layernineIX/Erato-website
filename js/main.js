@@ -33,7 +33,7 @@ const observer = new IntersectionObserver((entries) => {
 revealEls.forEach(el => observer.observe(el));
 
 // Product piece — size / print-size selectors
-document.querySelectorAll('.piece, .piece-solo').forEach(piece => {
+document.querySelectorAll('.piece, .piece-solo, .product-detail').forEach(piece => {
   const buttons = piece.querySelectorAll('.size-btn');
   const priceEl = piece.querySelector('.plaque-price');
   buttons.forEach(btn => {
@@ -87,3 +87,20 @@ document.querySelectorAll('.thumbs').forEach(group => {
   next.addEventListener('click',function(){rail.scrollBy({left:step(),behavior:'smooth'});});
   rail.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
 })();
+
+/* colour swatches that switch product images (data-k → assets/products/<slug>-<k>.jpg) */
+document.querySelectorAll('.swatches[data-switch]').forEach(group => {
+  const main = document.getElementById('mainShot'); if (!main) return;
+  const base = main.getAttribute('src').replace(/-(black|navy|redbrown)\.jpg$/, '');
+  const label = document.getElementById('colourLabel');
+  group.querySelectorAll('.swatch-dot').forEach(d => d.addEventListener('click', () => {
+    group.querySelectorAll('.swatch-dot').forEach(x => x.classList.remove('active')); d.classList.add('active');
+    const k = d.dataset.k, one = base + '-' + k + '.jpg', three = base + '-' + k + '-three.jpg';
+    const th = document.querySelectorAll('.thumbs .thumb');
+    if (th[0]) { th[0].dataset.src = one; th[0].querySelector('img').src = one; }
+    if (th[1]) { th[1].dataset.src = three; th[1].querySelector('img').src = three; }
+    th.forEach((x, i) => x.classList.toggle('active', i === 0));
+    main.src = one; main.alt = 'Loom mule, ' + d.dataset.name.toLowerCase();
+    if (label) label.textContent = 'Colour — ' + d.dataset.name;
+  }));
+});
