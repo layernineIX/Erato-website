@@ -76,3 +76,14 @@ document.querySelectorAll('.thumbs').forEach(group => {
     if (main) main.src = t.dataset.src;
   }));
 });
+
+/* collection rail arrows */
+(function(){
+  var rail=document.getElementById('teeRail');if(!rail)return;
+  var prev=document.getElementById('railPrev'),next=document.getElementById('railNext');
+  function step(){var c=rail.querySelector('.tee-card');return c?c.getBoundingClientRect().width+24:rail.clientWidth*0.8;}
+  function upd(){prev.disabled=rail.scrollLeft<4;next.disabled=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-4;}
+  prev.addEventListener('click',function(){rail.scrollBy({left:-step(),behavior:'smooth'});});
+  next.addEventListener('click',function(){rail.scrollBy({left:step(),behavior:'smooth'});});
+  rail.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+})();

@@ -15,7 +15,7 @@ Assets in assets/hero/: closed.jpg, open.jpg (2560x1440), rack.jpg, label.png (h
 Constants in wardrobe.js: ASPECT 16/9, RACK {x:.38542,y:.17593,w:.19792,h:.46296}, TEES array (key, slug, name, colour, tone).
 Rack was composited with Python/OpenCV (not in repo): open photo interior opening x≈1533–2157, rail y≈533–557, shelf y≈1311 (3840x2160 native).
 
-## Tees (7, USD 44, oversized 240gsm stone-washed cotton)
+## Tees (7, USD 44, premium 280gsm oversized stone-washed cotton, A3 DTG back print)
 horse=Caparison (Bone), mughal=Illuminated (Washed Charcoal), roses=Bloom (Bone), budapest=Concierge (Charcoal), nighthawks=Last Call (Bone), vertigo=Jade Room (Charcoal), wave=Kanagawa (Charcoal).
 Pages: product-<slug>.html. Images: assets/tees/<key>-back.jpg, <key>-detail.jpg. Old 9 products (the-court, eden, etc.) still exist in collections.
 

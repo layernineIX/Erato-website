@@ -632,3 +632,47 @@ body{background:var(--paper);color:var(--wood);}
   .about-copy{padding:48px 28px;} .section-sub{margin:-30px 20px 44px;}
 }
 @media (max-width:480px){.tee-meta{flex-direction:column;gap:2px;} .tee-meta span{text-align:left;}}
+
+/* ---------- INTRO + SPECS (replaces marquee / manifesto / pillars) ---------- */
+.intro{max-width:880px;margin:0 auto;padding:130px 24px 110px;text-align:center;}
+.intro h2{font-size:clamp(26px,3.6vw,42px);font-weight:300;line-height:1.25;margin-bottom:26px;}
+.intro-text{font-size:clamp(16px,1.5vw,18px);line-height:1.8;opacity:.8;max-width:680px;margin:0 auto 64px;}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.specs li{padding:34px 12px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:8px;}
+.specs li:first-child{border-left:none;}
+.specs strong{font-weight:300;font-size:clamp(24px,2.8vw,34px);letter-spacing:.01em;}
+.specs strong small{font-size:.45em;letter-spacing:.12em;text-transform:uppercase;margin-left:5px;opacity:.65;}
+.specs span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;}
+
+/* hero copy */
+.wr-eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;opacity:.85;margin-bottom:14px;}
+.wr-sub{font-size:clamp(14px,1.3vw,17px);line-height:1.6;opacity:.9;max-width:460px;margin:-6px 0 26px;text-shadow:0 1px 12px rgba(0,0,0,.45);}
+
+/* collection → big swipeable rail (3 up on desktop) */
+.collection{padding:120px 0 110px;overflow:hidden;}
+.collection-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:0 48px;max-width:1500px;margin:0 auto 44px;}
+.collection-head .section-eyebrow,.collection-head h2,.collection-head .section-sub{text-align:left;margin-left:0;}
+.collection-head h2{margin-bottom:14px;}
+.collection-head .section-sub{margin:0;max-width:520px;}
+.rail-btns{display:flex;gap:10px;flex-shrink:0;}
+.rail-btn{width:48px;height:48px;border:1px solid var(--wood);background:transparent;color:var(--wood);font-size:20px;cursor:pointer;transition:background .25s,color .25s,opacity .25s;font-family:var(--font);}
+.rail-btn:hover:not(:disabled){background:var(--wood);color:var(--paper);}
+.rail-btn:disabled{opacity:.3;cursor:default;}
+.tee-rail{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 48px;padding:6px 48px 28px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.tee-rail::-webkit-scrollbar{display:none;}
+.tee-rail:focus-visible{outline:2px solid var(--terra);outline-offset:-2px;}
+.tee-rail .tee-card{flex:0 0 calc((100% - 96px - 48px)/3);scroll-snap-align:start;}
+.tee-rail .tee-photo{aspect-ratio:4/5;}
+.tee-rail .tee-meta h4{font-size:20px;}
+@media (max-width:900px){
+  .collection{padding:84px 0 80px;}
+  .collection-head{padding:0 20px;flex-direction:column;align-items:flex-start;}
+  .rail-btns{display:none;}
+  .tee-rail{padding:6px 20px 24px;scroll-padding:0 20px;gap:14px;}
+  .tee-rail .tee-card{flex:0 0 78%;}
+  .specs{grid-template-columns:1fr 1fr;}
+  .specs li:nth-child(3){border-left:none;}
+  .specs li:nth-child(n+3){border-top:1px solid var(--line);}
+}
+.wr-copy h1,.wr-copy .wr-eyebrow{text-shadow:0 2px 16px rgba(0,0,0,.55);}
+.wr-stage .wr-bottom-scrim{opacity:1;}
