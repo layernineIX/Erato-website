@@ -686,3 +686,58 @@ body{background:var(--paper);color:var(--wood);}
 .rail-wrap .rail-btn:disabled{opacity:0;pointer-events:none;}
 @media (max-width:900px){.rail-wrap .rail-btn{display:flex;width:44px;height:44px;font-size:18px;align-items:center;justify-content:center;top:calc(50% - 40px);}.rail-wrap .rail-btn.prev{left:8px}.rail-wrap .rail-btn.next{right:8px}}
 button.swatch-dot{cursor:pointer;padding:0;}
+
+/* =====================================================================
+   UNIFY — secondary pages + lower home sections carry the wardrobe's
+   painted-cabinet language (plaster, wood, painted panel borders)
+   ===================================================================== */
+.page-hero{max-width:980px;position:relative;}
+.page-hero::before{content:"";display:block;width:120px;height:8px;margin-bottom:30px;
+  background:repeating-linear-gradient(90deg,var(--paint-red) 0 14px,transparent 14px 20px,var(--teal) 20px 34px,transparent 34px 40px,var(--gold) 40px 48px,transparent 48px 54px);}
+.page-hero h1{font-weight:400;letter-spacing:-.005em;}
+.page-hero{background:linear-gradient(180deg,var(--plaster) 0,var(--paper) 100%);max-width:none;padding-left:max(48px,calc((100vw - 1344px)/2 + 48px));padding-right:48px;}
+.page-hero h1,.page-hero p{max-width:860px;}
+
+/* tee cards everywhere = painted-panel frames, like the cabinet doors */
+.tee-photo,.piece-frame{border:1px solid var(--line);box-shadow:0 0 0 5px var(--paper),0 0 0 6px rgba(180,83,45,.45),0 22px 40px -24px rgba(42,26,15,.5);}
+.piece-frame,.tee-photo{background:linear-gradient(160deg,#ecdcbd,#dcc7a1);}
+.collection{background:linear-gradient(180deg,var(--plaster),var(--plaster2));}
+.tee-grid,.tee-rail{gap:34px 30px;}
+.pieces-grid{max-width:1344px;margin:0 auto;gap:64px 34px;padding-top:44px;}
+.pieces-grid .piece{padding:6px;}
+.piece .plaque-preview,.tee-meta{border-top:2px solid var(--wood);}
+.piece .view-hint{color:var(--terra);opacity:1;}
+.piece:hover .plaque-preview h3{color:var(--terra);}
+
+/* archive: older shots are shown quieter so the 7 new tees lead */
+.archive-head{max-width:1344px;margin:0 auto;padding:30px 48px 0;}
+.archive-head .ornament{margin:0 0 30px;}
+.archive-head .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-bottom:12px;}
+.archive-head h2{font-size:clamp(26px,3vw,36px);font-weight:400;margin-bottom:10px;}
+.archive-head p{font-size:15px;opacity:.7;max-width:520px;line-height:1.7;}
+.archive-grid{padding-top:36px;}
+.archive-grid .piece-frame img{filter:sepia(.28) saturate(.82) contrast(.96) brightness(1.02);}
+.archive-grid .piece:hover .piece-frame img{filter:none;}
+
+/* section headings + buttons share the hero's weight */
+h2{font-weight:400;}
+.intro h2,.room-band h3,.beyond-tile h4{font-weight:400;}
+.intro{position:relative;}
+.intro::before{content:"";display:block;width:160px;height:8px;margin:0 auto 38px;
+  background:repeating-linear-gradient(90deg,var(--paint-red) 0 14px,transparent 14px 20px,var(--teal) 20px 34px,transparent 34px 40px,var(--gold) 40px 48px,transparent 48px 54px);}
+.specs strong{font-weight:400;}
+.btn-ink,.section-more a{border-color:var(--terra);color:var(--wood);}
+.btn-ink:hover{background:var(--terra);border-color:var(--terra);color:#fff;}
+.journal-card{box-shadow:0 18px 30px -22px rgba(42,26,15,.5);}
+.add-to-bag{background:var(--wood);}
+.add-to-bag:hover{background:var(--terra);}
+.footer{border-top:6px solid var(--terra);}
+@media (max-width:900px){
+  .page-hero{padding:130px 22px 36px;}
+  .archive-head{padding:20px 22px 0;}
+  .pieces-grid{padding-left:20px;padding-right:20px;}
+}
+.pieces-grid{grid-template-columns:repeat(4,1fr);}
+.archive-grid{grid-template-columns:repeat(3,1fr);}
+@media (max-width:1000px){.pieces-grid{grid-template-columns:repeat(2,1fr);}.archive-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:520px){.pieces-grid,.archive-grid{grid-template-columns:1fr;}}
