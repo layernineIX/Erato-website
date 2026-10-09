@@ -9,13 +9,13 @@
   const RACK = { x: 0.29095, y: 0.16493, w: 0.42026, h: 0.48611 };
 
   const TEES = [
-    { k:'horse',      slug:'carpet-horse',  name:'Carpet Horse',    col:'Bone' },
-    { k:'mughal',     slug:'mughal-letter', name:'Mughal Letter',   col:'Washed Charcoal' },
-    { k:'roses',      slug:'rose-garden',   name:'Rose Garden',     col:'Bone' },
-    { k:'budapest',   slug:'budapest',      name:'Budapest',        col:'Washed Charcoal' },
-    { k:'nighthawks', slug:'nighthawks',    name:'Nighthawks',      col:'Bone' },
-    { k:'vertigo',    slug:'vertigo',       name:'Vertigo',         col:'Washed Charcoal' },
-    { k:'wave',       slug:'the-wave',      name:'The Wave',        col:'Washed Charcoal' }
+    { k:'horse',      slug:'carpet-horse',  name:'Carpet Horse',    col:'Bone', tone:'dark' },
+    { k:'mughal',     slug:'mughal-letter', name:'Mughal Letter',   col:'Washed Charcoal', tone:'light' },
+    { k:'roses',      slug:'rose-garden',   name:'Rose Garden',     col:'Bone', tone:'dark' },
+    { k:'budapest',   slug:'budapest',      name:'Budapest',        col:'Washed Charcoal', tone:'light' },
+    { k:'nighthawks', slug:'nighthawks',    name:'Nighthawks',      col:'Bone', tone:'dark' },
+    { k:'vertigo',    slug:'vertigo',       name:'Vertigo',         col:'Washed Charcoal', tone:'light' },
+    { k:'wave',       slug:'the-wave',      name:'The Wave',        col:'Washed Charcoal', tone:'light' }
   ];
   const href = t => 'product-' + t.slug + '.html';
 
@@ -159,6 +159,8 @@
   const setPull = i => {
     cur = (i + TEES.length) % TEES.length;
     const t = TEES[cur];
+    pull.classList.toggle('tone-light', t.tone === 'light');
+    document.body.classList.toggle('wr-light', t.tone === 'light' && !pull.hidden);
     pullImg.src = `assets/hero/pull-${t.k}.webp`; pullImg.alt = t.name + ' t-shirt, back';
     $('wrPullName').textContent = t.name;
     $('wrPullMeta').textContent = t.col + ' · RM 169';
@@ -169,6 +171,7 @@
     lastFocus = document.activeElement;
     setPull(i);
     pull.hidden = false; pull.classList.remove('on', 'settled');
+    document.body.classList.toggle('wr-light', TEES[cur].tone === 'light');
     pullTee.style.transition = 'none';
     // start where the tee hangs (FLIP)
     const pr = pullTee.getBoundingClientRect();
@@ -185,6 +188,7 @@
   function closePull(instant) {
     if (pull.hidden) return;
     pull.classList.remove('on', 'settled');
+    document.body.classList.remove('wr-light');
     setTimeout(() => { pull.hidden = true; }, instant || reduce ? 0 : 450);
     if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   }

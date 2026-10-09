@@ -512,3 +512,14 @@ a.piece{text-decoration:none;color:inherit;display:flex;}
   .wr-world,.wr-closed,.wr-rack,.wr-layer,.wr-pull,.wr-pull-info,.wr-tag{transition:none!important;}
   .wr-touchhint .dot{animation:none;}
 }
+
+/* pull-out: light stone backdrop behind the dark tees so they read crisp and rich */
+.wr-pull.tone-light{background:radial-gradient(ellipse at 50% 38%,#efe5d0,#c5ad88 70%,#a8906b);}
+.wr-pull.tone-light .wr-pull-info,.wr-pull.tone-light .wr-pull-close,.wr-pull.tone-light .wr-pull-nav{color:var(--ink);}
+.wr-pull.tone-light .wr-pull-tee img{filter:drop-shadow(0 28px 34px rgba(60,38,14,.38));}
+.wr-pull.tone-light .wr-btn{border-color:rgba(27,26,21,.7);color:var(--ink);}
+.wr-pull.tone-light .wr-btn.solid,.wr-pull.tone-light .wr-btn:hover{background:var(--ink);color:var(--paper);}
+.wr-pull{transition:opacity .55s ease,background .4s ease;}
+body.wr-light.home .nav:not(.scrolled) .nav-links a{color:var(--ink);text-shadow:none;}
+body.wr-light.home .nav:not(.scrolled) .nav-logo img{filter:none;}
+body.wr-light.home .nav:not(.scrolled) .nav-toggle span{background:var(--ink);}
