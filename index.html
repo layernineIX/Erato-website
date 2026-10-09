@@ -42,7 +42,7 @@
   <div class="wr-backdrop" id="wrBackdrop"></div>
   <div class="wr-stage" id="wrStage">
     <div class="wr-world" id="wrWorld">
-      <img class="wr-img wr-room" src="assets/hero/open.jpg" alt="The wardrobe with its doors open and seven t-shirts hanging inside" draggable="false">
+      <img class="wr-img wr-room" src="assets/hero/open.jpg" alt="The open ERATO wardrobe: seven t-shirts on the rail, a tote bag on the shelf and woven mules on the floor" draggable="false">
       <img class="wr-img wr-closed" id="wrClosed" src="assets/hero/closed.jpg" alt="A hand-painted wardrobe in a sunlit Mediterranean room, doors closed" draggable="false">
       <div class="wr-rack" id="wrRack">
         <img class="wr-rackimg" src="assets/hero/rack.jpg" alt="" draggable="false">
@@ -61,7 +61,7 @@
     </div>
     <div class="wr-tag" id="wrTag" aria-hidden="true">open me</div>
     <button class="wr-back" id="wrBack" hidden>&larr; The wardrobe</button>
-    <ul class="wr-index" id="wrIndex" aria-label="The seven t-shirts" hidden></ul>
+    <ul class="wr-index" id="wrIndex" aria-label="Wardrobe pieces" hidden></ul>
     <div class="scroll-cue"><span class="line"></span><span>Scroll</span></div>
   </div>
 
@@ -80,7 +80,7 @@
     </div>
   </div>
 </section>
-<script>window.WR_META={"horse": {"i": 0, "x": 0.09375, "y": 0.18375, "w": 0.34539473684210525, "h": 0.5075}, "mughal": {"i": 1, "x": 0.17105263157894737, "y": 0.18375, "w": 0.34539473684210525, "h": 0.4891666666666667}, "roses": {"i": 2, "x": 0.2461622807017544, "y": 0.18375, "w": 0.34539473684210525, "h": 0.5070833333333333}, "budapest": {"i": 3, "x": 0.3229166666666667, "y": 0.18375, "w": 0.34594298245614036, "h": 0.4891666666666667}, "nighthawks": {"i": 4, "x": 0.3980263157894737, "y": 0.18375, "w": 0.34594298245614036, "h": 0.5066666666666667}, "vertigo": {"i": 5, "x": 0.47423245614035087, "y": 0.18375, "w": 0.34539473684210525, "h": 0.4891666666666667}, "wave": {"i": 6, "x": 0.549890350877193, "y": 0.18375, "w": 0.34594298245614036, "h": 0.4891666666666667}};</script>
+<script>window.WR_META={"horse": {"i": 0, "x": 0.09375, "y": 0.13815789473684212, "w": 0.34594298245614036, "h": 0.38095238095238093}, "mughal": {"i": 1, "x": 0.17050438596491227, "y": 0.13815789473684212, "w": 0.34649122807017546, "h": 0.36654135338345867}, "roses": {"i": 2, "x": 0.24561403508771928, "y": 0.13815789473684212, "w": 0.34649122807017546, "h": 0.3806390977443609}, "budapest": {"i": 3, "x": 0.3229166666666667, "y": 0.13815789473684212, "w": 0.34649122807017546, "h": 0.36654135338345867}, "nighthawks": {"i": 4, "x": 0.39747807017543857, "y": 0.13815789473684212, "w": 0.34594298245614036, "h": 0.3806390977443609}, "vertigo": {"i": 5, "x": 0.47368421052631576, "y": 0.13815789473684212, "w": 0.34649122807017546, "h": 0.3668546365914787}, "wave": {"i": 6, "x": 0.549890350877193, "y": 0.13815789473684212, "w": 0.34649122807017546, "h": 0.36654135338345867}, "shoes": {"i": 7, "x": 0.13157894736842105, "y": 0.8483709273182958, "w": 0.7362938596491229, "h": 0.06641604010025062}, "tote": {"i": 8, "x": 0.5317982456140351, "y": 0.5457393483709273, "w": 0.17324561403508773, "h": 0.17261904761904762}};</script>
 
 <section class="intro" id="concept">
   <p class="section-eyebrow reveal">About ERATO</p>
@@ -101,11 +101,10 @@
       <h2>The Collection</h2>
       <p class="section-sub">Premium 280gsm oversized stone-washed cotton, with a large A3 DTG print on the back. USD 44.</p>
     </div>
-    <div class="rail-btns">
-      <button class="rail-btn" id="railPrev" aria-label="Previous t-shirts">&larr;</button>
-      <button class="rail-btn" id="railNext" aria-label="Next t-shirts">&rarr;</button>
-    </div>
   </div>
+  <div class="rail-wrap">
+  <button class="rail-btn prev" id="railPrev" aria-label="Previous t-shirts">&larr;</button>
+  <button class="rail-btn next" id="railNext" aria-label="Next t-shirts">&rarr;</button>
   <div class="tee-rail" id="teeRail" tabindex="0" aria-label="T-shirt collection, scroll sideways">
     <a class="tee-card" href="product-caparison.html">
       <div class="tee-photo"><img src="assets/tees/horse-back.jpg" alt="Caparison — ERATO t-shirt, back view" loading="lazy"></div>
@@ -135,6 +134,7 @@
       <div class="tee-photo"><img src="assets/tees/wave-back.jpg" alt="Kanagawa — ERATO t-shirt, back view" loading="lazy"></div>
       <div class="tee-meta"><h4>Kanagawa</h4><span>Charcoal · USD 44</span></div>
     </a>
+  </div>
   </div>
   <p class="section-more reveal"><a href="collections.html">View the full collection &rarr;</a></p>
 </section>
