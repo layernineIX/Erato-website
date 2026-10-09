@@ -28,3 +28,6 @@ Pages: product-<slug>.html. Images: assets/tees/<key>-back.jpg, <key>-detail.jpg
 5. Collections page: retire or group the 9 older pieces as "Archive".
 6. Mobile QA, delete duplicate folder "erato-website 2".
 Prints: product-riviera.html (framed, frame.py renders assets/products/riviera-*.jpg).
+
+- Display accent: .display class (Bodoni Moda, index intro heading only) is allowed; Jost stays everywhere else. Join band + footers use --night (#1a1640), not brown.
+- Deploy gotcha: .assetsignore must keep .git out of Workers assets (25 MiB per-file limit); keep videos under ~0.7 MB.

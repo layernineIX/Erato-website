@@ -774,3 +774,20 @@ h2{font-weight:400;}
 .intro-copy .intro-text{margin:0 0 18px;max-width:46ch;}
 .intro-copy .btn-ink{margin-top:18px;}
 @media (max-width:860px){.intro{grid-template-columns:1fr;padding:80px 22px;}}
+
+/* display accent: high-contrast editorial serif for hero statements (Jost stays for everything else) */
+.display{font-family:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.02;}
+.display span{font-family:var(--font);font-weight:300;font-size:.42em;letter-spacing:.34em;text-transform:uppercase;vertical-align:.55em;margin-right:.2em;}
+.display em{font-style:italic;font-weight:400;font-size:1.15em;color:var(--terra);letter-spacing:-.02em;}
+.display .d2{display:inline-block;margin-top:.12em;font-family:"Bodoni Moda","Didot",Georgia,serif;font-size:.78em;font-weight:400;letter-spacing:.005em;text-transform:none;vertical-align:baseline;margin-right:0;}
+.intro-photo img{aspect-ratio:4/5;object-position:52% 50%;}
+
+/* night palette: replaces the brown on the join band and footer */
+:root{--night:#1a1640;--night2:#262057;}
+.join{background:radial-gradient(120% 120% at 30% 0%,var(--night2),var(--night) 62%);color:#ece8f7;}
+.join-form{border-bottom-color:rgba(236,232,247,.35);}
+.join-form input,.join-form button{color:#ece8f7;}
+.join-form input::placeholder{color:rgba(236,232,247,.55);}
+.footer{background:var(--night);color:#ece8f7;border-top:1px solid rgba(225,203,64,.55);}
+.footer-links a,.copyright{color:#ece8f7;}
+.marquee{background:var(--night);}
