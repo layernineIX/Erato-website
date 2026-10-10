@@ -791,3 +791,20 @@ h2{font-weight:400;}
 .footer{background:var(--night);color:#ece8f7;border-top:1px solid rgba(225,203,64,.55);}
 .footer-links a,.copyright{color:#ece8f7;}
 .marquee{background:var(--night);}
+
+/* bigger ERATO logo */
+.nav-logo img{height:52px;width:auto;}
+body.home .nav{padding:18px 48px;}
+body.home .nav.scrolled{padding:12px 48px;}
+@media (max-width:900px){.nav-logo img{height:40px;} body.home .nav{padding:14px 22px;}}
+
+/* hero copy: bigger, bolder, on its own soft dark scrim so it reads on any photo */
+.wr-copy{max-width:640px;bottom:96px;}
+.wr-copy::before{content:"";position:absolute;inset:-70px -140px -50px -90px;z-index:-1;background:radial-gradient(ellipse at 30% 60%,rgba(12,7,3,.62),rgba(12,7,3,.34) 55%,transparent 75%);pointer-events:none;}
+.wr-copy h1{font-size:clamp(40px,5.6vw,84px);font-weight:400;line-height:1.02;letter-spacing:-.01em;margin-bottom:22px;text-shadow:0 2px 24px rgba(0,0,0,.6);}
+.wr-copy .wr-eyebrow{font-size:13px;font-weight:500;letter-spacing:.26em;opacity:1;margin-bottom:18px;text-shadow:0 1px 12px rgba(0,0,0,.7);}
+.wr-copy .wr-sub{font-size:clamp(15px,1.4vw,19px);font-weight:400;line-height:1.6;opacity:1;max-width:520px;margin:0 0 30px;text-shadow:0 1px 14px rgba(0,0,0,.75);}
+.wr-copy .btn{background:var(--paper);color:var(--wood);border-color:var(--paper);font-weight:500;padding:16px 38px;}
+.wr-copy .btn:hover{background:var(--terra);border-color:var(--terra);color:#fff;}
+@media (max-width:900px){.wr-copy::before{inset:-40px -24px -30px -24px;}.wr-copy h1{font-size:clamp(36px,11vw,56px);}}
+@media (max-width:520px){.wr-copy .wr-eyebrow{font-size:11px;letter-spacing:.16em;}}
