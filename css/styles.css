@@ -822,3 +822,14 @@ body.home .nav.scrolled{padding:12px 48px;}
 /* logo 20% smaller */
 .nav-logo img{height:42px;}
 @media (max-width:900px){.nav-logo img{height:32px;}}
+
+/* Wardrobe: no name chips; mobile hero text sits lower so the doors stay visible */
+.wr-index{display:none !important;}
+@media (max-width:900px){
+  .wr-copy{bottom:22px;}
+  .wr-copy .wr-eyebrow{margin-bottom:10px;}
+  .wr-copy h1{margin-bottom:12px;}
+  .wr-copy .wr-sub{font-size:13px;line-height:1.5;margin:0 0 16px;}
+  .wr-copy .btn{padding:12px 26px;}
+  .wr-copy::before{inset:-30px -24px -22px -24px;}
+}
