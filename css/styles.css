@@ -808,3 +808,11 @@ body.home .nav.scrolled{padding:12px 48px;}
 .wr-copy .btn:hover{background:var(--terra);border-color:var(--terra);color:#fff;}
 @media (max-width:900px){.wr-copy::before{inset:-40px -24px -30px -24px;}.wr-copy h1{font-size:clamp(36px,11vw,56px);}}
 @media (max-width:520px){.wr-copy .wr-eyebrow{font-size:11px;letter-spacing:.16em;}}
+
+/* hero copy: toned down — lighter weight, smaller */
+.wr-copy{max-width:560px;}
+.wr-copy h1{font-size:clamp(30px,3.7vw,54px);font-weight:300;line-height:1.1;margin-bottom:18px;}
+.wr-copy .wr-eyebrow{font-size:12px;font-weight:400;letter-spacing:.24em;margin-bottom:14px;}
+.wr-copy .wr-sub{font-size:clamp(14px,1.15vw,16px);font-weight:300;line-height:1.65;max-width:440px;margin:0 0 24px;}
+.wr-copy .btn{font-weight:400;padding:14px 32px;font-size:11.5px;}
+@media (max-width:900px){.wr-copy h1{font-size:clamp(30px,8.5vw,44px);}}
