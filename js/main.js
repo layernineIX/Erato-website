@@ -51,7 +51,7 @@ document.querySelectorAll('.piece, .piece-solo, .product-detail').forEach(piece 
 // Join the list: saved on our server (/api/join) and emailed to us via Web3Forms
 (function () {
   var form = document.getElementById('joinForm'); if (!form) return;
-  var JOIN_KEY = ''; /* Web3Forms access key (public, safe to keep here). Emails each signup to eratodesign@gmail.com */
+  var JOIN_KEY = 'dd75901b-6632-459d-8101-97c80c2529d7'; /* Web3Forms access key (public, safe to keep here). Emails each signup to eratodesign@gmail.com */
   var sec = form.closest('.join'), msg = document.getElementById('joinMsg'), done = document.getElementById('joinDone');
   var input = form.querySelector('input'), btn = form.querySelector('.join-btn');
   var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
