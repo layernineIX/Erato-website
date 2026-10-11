@@ -67,7 +67,7 @@
 <script>
 (function(){try{var o=JSON.parse(sessionStorage.getItem('erato_last_order')||'null');if(!o)return;
 var m=function(n){return 'USD '+n.toFixed(2).replace(/\.00$/,'')};
-var h='<h2>Your order</h2><table>'+o.items.map(function(i){return '<tr><td>'+i.name.replace(/[<>&]/g,'')+' <small>'+i.opts.replace(/[<>&]/g,'')+'</small> x '+i.qty+'</td><td>'+m(i.price*i.qty)+'</td></tr>'}).join('')+'<tr><td>Shipping</td><td>'+m(o.ship)+'</td></tr><tr><td><b>Total</b></td><td><b>'+m(o.total)+'</b></td></tr></table><p>Order reference: '+String(o.id).replace(/[^A-Z0-9]/gi,'')+'</p>';
+var h='<h2>Your order</h2><table>'+o.items.map(function(i){return '<tr><td>'+i.name.replace(/[<>&]/g,'')+' <small>'+i.opts.replace(/[<>&]/g,'')+'</small> x '+i.qty+'</td><td>'+m(i.price*i.qty)+'</td></tr>'}).join('')+''+(o.disc>0?'<tr><td>Discount '+String(o.code||'').replace(/[^A-Z0-9]/gi,'')+'</td><td>-'+m(o.disc)+'</td></tr>':'')+'<tr><td>Shipping</td><td>'+m(o.ship)+'</td></tr><tr><td><b>Total</b></td><td><b>'+m(o.total)+'</b></td></tr></table><p>Order reference: '+String(o.id).replace(/[^A-Z0-9]/gi,'')+'</p>';
 document.getElementById('orderBox').innerHTML=h;}catch(e){}})();
 </script>
 </body>

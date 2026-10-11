@@ -923,3 +923,12 @@ body.home .nav .bag-btn{color:#fff;filter:drop-shadow(0 1px 4px rgba(0,0,0,.5));
 body.home .nav.scrolled .bag-btn{color:var(--ink);filter:none;}
 @media (max-width:900px){.bag-btn{margin-left:0;margin-right:12px;}}
 @media (prefers-reduced-motion:reduce){.bag-btn,.bag-ico,.bag-count{transition:none;}.bag-btn.bump .bag-ico{animation:none;}.bag-btn:hover{transform:none;}}
+
+.bag-code{display:flex;gap:8px;}
+.bag-code input{flex:1;min-width:0;padding:12px;font-family:var(--font);font-size:14px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:#fff;color:var(--ink);}
+.bag-code input:focus{outline:2px solid var(--terra);outline-offset:1px;}
+.bag-code button{padding:0 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-family:var(--font);font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;}
+.bag-codemsg{font-size:13px;margin:8px 0 0;}
+.bag-codemsg.ok{color:#2f6b3b;}.bag-codemsg.bad{color:#9a3a22;}
+.bag-codemsg[hidden],#bagDiscRow[hidden]{display:none;}
+#bagDiscRow dd{color:#2f6b3b;}
