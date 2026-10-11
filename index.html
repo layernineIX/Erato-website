@@ -195,13 +195,27 @@
   </div>
 </section>
 
-<section class="join">
-  <h2 class="reveal">Join the list</h2>
-  <p class="reveal">New drops, print releases, and the occasional field note. No noise.</p>
-  <form class="join-form reveal" id="joinForm">
-    <input type="email" placeholder="Your email" aria-label="Your email" required>
-    <button type="submit">Join</button>
-  </form>
+<section class="join" id="join">
+  <div class="join-glow" aria-hidden="true"></div>
+  <svg class="join-rings" viewBox="0 0 800 800" aria-hidden="true"><circle cx="400" cy="400" r="150"/><circle cx="400" cy="400" r="230"/><circle cx="400" cy="400" r="320"/><circle cx="400" cy="400" r="390"/></svg>
+  <div class="join-inner">
+    <p class="join-kicker reveal">Join the list</p>
+    <h2 class="join-title display reveal">Letters from <em>the studio</em></h2>
+    <p class="join-sub reveal">New drops, print releases, and the occasional field note. No noise.</p>
+    <form class="join-form reveal" id="joinForm" novalidate>
+      <label class="join-field"><span class="join-label">Your email</span>
+        <input type="email" name="email" autocomplete="email" placeholder="you@example.com" aria-label="Your email" required>
+        <svg class="join-line" viewBox="0 0 100 4" preserveAspectRatio="none" aria-hidden="true"><path d="M0 2 H100" pathLength="1"/></svg>
+      </label>
+      <button type="submit" class="join-btn"><span>Seal &amp; send</span></button>
+    </form>
+    <p class="join-msg" id="joinMsg" role="status" aria-live="polite"></p>
+    <div class="join-done" id="joinDone" hidden>
+      <svg class="join-seal" viewBox="0 0 120 120" aria-hidden="true"><circle class="s-ring" cx="60" cy="60" r="52" pathLength="1"/><circle class="s-fill" cx="60" cy="60" r="44"/><text x="60" y="76" text-anchor="middle">E</text></svg>
+      <p class="join-done-t">Sealed.</p>
+      <p class="join-done-s">Your first letter arrives with the next drop.</p>
+    </div>
+  </div>
 </section>
 
 <footer class="footer">

@@ -48,16 +48,43 @@ document.querySelectorAll('.piece, .piece-solo, .product-detail').forEach(piece 
 });
 
 
-// Newsletter form (in-memory only, no backend yet)
-const joinForm = document.getElementById('joinForm');
-if (joinForm) {
-  joinForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = joinForm.querySelector('input');
-    input.value = '';
-    input.placeholder = "You're on the list.";
+// Join the list: saved on our server (/api/join) and emailed to us via Web3Forms
+(function () {
+  var form = document.getElementById('joinForm'); if (!form) return;
+  var JOIN_KEY = ''; /* Web3Forms access key (public, safe to keep here). Emails each signup to eratodesign@gmail.com */
+  var sec = form.closest('.join'), msg = document.getElementById('joinMsg'), done = document.getElementById('joinDone');
+  var input = form.querySelector('input'), btn = form.querySelector('.join-btn');
+  var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!calm) {
+    sec.addEventListener('pointermove', function (e) {
+      var r = sec.getBoundingClientRect();
+      sec.style.setProperty('--mx', (e.clientX - r.left) + 'px'); sec.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+    form.addEventListener('pointermove', function (e) {
+      var r = btn.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+      var d = Math.hypot(dx, dy);
+      if (d < 120) { btn.style.setProperty('--bx', (dx * .18) + 'px'); btn.style.setProperty('--by', (dy * .25) + 'px'); }
+      else { btn.style.setProperty('--bx', '0px'); btn.style.setProperty('--by', '0px'); }
+    });
+    form.addEventListener('pointerleave', function () { btn.style.setProperty('--bx', '0px'); btn.style.setProperty('--by', '0px'); });
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); msg.textContent = '';
+    var email = input.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Please enter a valid email address.'; input.focus(); return; }
+    btn.disabled = true; btn.firstElementChild.textContent = 'Sealing...';
+    var jobs = [fetch('/api/join', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: email }) })
+      .then(function (r) { return r.json(); }).then(function (r) { return !!r.ok; }).catch(function () { return false; })];
+    if (JOIN_KEY) jobs.push(fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json' },
+      body: JSON.stringify({ access_key: JOIN_KEY, subject: 'New ERATO list signup', from_name: 'ERATO website', email: email, message: 'New signup for the ERATO list: ' + email }) })
+      .then(function (r) { return r.ok; }).catch(function () { return false; }));
+    Promise.all(jobs).then(function (res) {
+      if (!res.some(Boolean)) { btn.disabled = false; btn.firstElementChild.textContent = 'Seal & send'; msg.textContent = 'Could not send. Please try again, or message us on Instagram.'; return; }
+      form.classList.add('is-sealing');
+      setTimeout(function () { form.hidden = true; msg.textContent = ''; done.hidden = false; }, calm ? 0 : 850);
+    });
   });
-}
+})();
 
 // Product gallery thumbnails
 document.querySelectorAll('.thumbs').forEach(group => {

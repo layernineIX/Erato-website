@@ -55,11 +55,24 @@ async function handleCode(request, env) {
   return json({ error: 'Bad request' }, 400);
 }
 
+async function handleJoin(request, env) {
+  if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
+  const origin = request.headers.get('origin');
+  if (origin && new URL(origin).host !== new URL(request.url).host) return json({ error: 'Forbidden' }, 403);
+  let b; try { b = await request.json(); } catch (e) { return json({ error: 'Bad request' }, 400); }
+  if (!okEmail(b.email)) return json({ ok: false, error: 'Invalid email' }, 400);
+  await env.USED.put('s:' + norm(b.email), new Date().toISOString());
+  return json({ ok: true });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === '/api/code') {
       try { return await handleCode(request, env); } catch (e) { return json({ ok: false, error: 'Could not check the code. Try again.' }, 500); }
+    }
+    if (url.pathname === '/api/join') {
+      try { return await handleJoin(request, env); } catch (e) { return json({ ok: false }, 500); }
     }
     return env.ASSETS.fetch(request);
   }
