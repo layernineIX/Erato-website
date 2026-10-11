@@ -1,14 +1,9 @@
-/* ERATO bag + PayPal checkout (cards via PayPal guest checkout). No backend. */
+/* ERATO bag + PayPal checkout (cards via PayPal guest checkout). Codes checked by /api/code. */
 (function () {
   'use strict';
   var PAYPAL_CLIENT_ID = 'BAAXztDRMc1eYSxfBqXuVCAG414Js_lYKV0lxeTc-Pk0PkMAmkOo6TAlgrQcdASTV0jELPP2nPqqYyeF3A';
   var CURRENCY = 'USD';
-  /* Discount codes. type: 'percent' or 'amount' (USD off). Optional: min (minimum subtotal), expires ('YYYY-MM-DD').
-     Codes are visible to anyone who reads this file and cannot be limited to one use per person. */
-  var CODES = {
-    EN10: { type: 'percent', value: 10, label: '10% off' },
-    EF15: { type: 'percent', value: 15, label: '15% off' }
-  };
+  /* Discount codes are checked on our server (src/codes.js). */
   /* Shipping per order, by destination. Edit the numbers here. */
   var FREE_OVER = 100; /* Standard shipping is free when the subtotal reaches this (USD) */
   var REGIONS = {
@@ -42,21 +37,19 @@
   if (!REGIONS[region]) region = '';
   var method = load(MKEY, 'std'); if (method !== 'exp') method = 'std';
   var code = load(CKEY, ''); if (typeof code !== 'string') code = '';
+  var applied = null, codeMsg = '', codeEmail = '', needEmail = false; /* applied = server-confirmed code {code,type,value,label,min} */
 
   function money(n) { return 'USD ' + n.toFixed(2).replace(/\.00$/, ''); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function subtotal() { return cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0); }
   function count() { return cart.reduce(function (s, i) { return s + i.qty; }, 0); }
-  function codeStatus(c) {
-    c = (c || '').trim().toUpperCase(); var d = CODES[c];
-    if (!c) return { ok: false, msg: '' };
-    if (!d) return { ok: false, msg: 'That code is not valid.' };
-    if (d.expires && new Date() > new Date(d.expires + 'T23:59:59')) return { ok: false, msg: 'That code has expired.' };
-    if (d.min && subtotal() < d.min) return { ok: false, msg: 'This code needs a bag of at least USD ' + d.min + '.' };
-    return { ok: true, code: c, d: d };
+  function codeStatus() {
+    if (!applied) return { ok: false, msg: codeMsg };
+    if (applied.min && subtotal() < applied.min) return { ok: false, msg: 'This code needs a bag of at least USD ' + applied.min + '.' };
+    return { ok: true, code: applied.code, d: applied };
   }
   function discount() {
-    var s = codeStatus(code); if (!s.ok) return 0;
+    var s = codeStatus(); if (!s.ok) return 0;
     var v = s.d.type === 'percent' ? subtotal() * s.d.value / 100 : s.d.value;
     return Math.min(subtotal(), Math.round(v * 100) / 100);
   }
@@ -92,6 +85,7 @@
         '</fieldset>' +
         '<label class="bag-label" for="bagCode">Discount code</label>' +
         '<div class="bag-code"><input id="bagCode" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Enter code"><button type="button" id="bagApply">Apply</button></div>' +
+        '<div class="bag-code" id="bagEmailRow" hidden><input id="bagCodeEmail" type="email" autocomplete="email" placeholder="Your email (one use per email)"></div>' +
         '<p class="bag-codemsg" id="bagCodeMsg" hidden></p>' +
         '<dl class="bag-sum"><div><dt>Subtotal</dt><dd id="bagSub"></dd></div><div id="bagDiscRow" hidden><dt id="bagDiscLbl">Discount</dt><dd id="bagDisc"></dd></div><div><dt>Shipping</dt><dd id="bagShip"></dd></div><div class="tot"><dt>Total</dt><dd id="bagTot"></dd></div></dl>' +
         '<p class="bag-hint" id="bagHint">Choose where we ship to, then pay by card or PayPal. Free standard shipping on orders over USD ' + FREE_OVER + '.</p>' +
@@ -126,12 +120,13 @@
     var ms = $('#bagMethods'); ms.hidden = !region;
     if (region) { $('#mStd').textContent = moneyFree(rateFor('std')); $('#mExp').textContent = moneyFree(rateFor('exp')); }
     panel.querySelectorAll('input[name=bagMethod]').forEach(function (r) { r.checked = r.value === method; });
-    var dsc = discount(), st = codeStatus(code);
+    var dsc = discount(), st = codeStatus();
     $('#bagDiscRow').hidden = !(dsc > 0);
     if (dsc > 0) { $('#bagDisc').textContent = '-' + money(dsc); $('#bagDiscLbl').textContent = 'Discount (' + st.code + ')'; }
     var cm = $('#bagCodeMsg');
-    if (code && st.ok) { cm.hidden = false; cm.className = 'bag-codemsg ok'; cm.textContent = 'Code applied: ' + st.d.label + '.'; }
-    else if (code && st.msg) { cm.hidden = false; cm.className = 'bag-codemsg bad'; cm.textContent = st.msg; }
+    $('#bagEmailRow').hidden = !needEmail;
+    if (applied && st.ok) { cm.hidden = false; cm.className = 'bag-codemsg ok'; cm.textContent = 'Code applied: ' + st.d.label + '.'; }
+    else if (st.msg) { cm.hidden = false; cm.className = 'bag-codemsg bad'; cm.textContent = st.msg; }
     else { cm.hidden = true; }
     $('#bagTot').textContent = money(subtotal() - dsc + shipping());
     hintEl.hidden = !!region; ppEl.hidden = !region;
@@ -148,9 +143,22 @@
   sel.addEventListener('change', function () { region = sel.value; save(RKEY, region); showErr(''); render(); });
   var codeIn = $('#bagCode');
   codeIn.value = code;
+  var emailIn = $('#bagCodeEmail');
+  function api(body) {
+    return fetch('/api/code', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), keepalive: true })
+      .then(function (r) { return r.json(); });
+  }
   function applyCode() {
     var v = codeIn.value.trim().toUpperCase(); codeIn.value = v;
-    code = v; save(CKEY, code); showErr(''); render();
+    code = v; save(CKEY, code); showErr(''); applied = null; codeMsg = ''; needEmail = false;
+    if (!v) { render(); return; }
+    codeEmail = emailIn.value.trim();
+    codeMsg = 'Checking code...'; render();
+    api({ action: 'check', code: v, email: codeEmail, sub: subtotal() }).then(function (r) {
+      if (r.ok) { applied = r; codeMsg = ''; }
+      else { needEmail = !!r.needEmail; codeMsg = r.error || 'That code is not valid.'; }
+      render();
+    }).catch(function () { codeMsg = 'Could not check the code. Try again.'; render(); });
   }
   $('#bagApply').addEventListener('click', applyCode);
   codeIn.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); applyCode(); } });
@@ -217,7 +225,7 @@
     document.head.appendChild(s);
   }
   function orderPayload() {
-    var sub = subtotal(), ship = shipping(), dsc = discount(), st = codeStatus(code);
+    var sub = subtotal(), ship = shipping(), dsc = discount(), st = codeStatus();
     return {
       intent: 'CAPTURE',
       purchase_units: [{
@@ -244,7 +252,13 @@
         if (!region) { showErr('Choose where we ship to first.'); return actions.reject(); }
         return actions.resolve();
       },
-      createOrder: function (data, actions) { return actions.order.create(orderPayload()); },
+      createOrder: function (data, actions) {
+        if (!applied) return actions.order.create(orderPayload());
+        return api({ action: 'check', code: applied.code, email: codeEmail, sub: subtotal() }).then(function (r) {
+          if (!r.ok) { applied = null; codeMsg = r.error || 'That code can no longer be used.'; render(); throw new Error('code'); }
+          return actions.order.create(orderPayload());
+        });
+      },
       onShippingAddressChange: function (data, actions) {
         try {
           var cc = data.shippingAddress && data.shippingAddress.countryCode;
@@ -253,7 +267,8 @@
       },
       onApprove: function (data, actions) {
         return actions.order.capture().then(function (d) {
-          try { sessionStorage.setItem('erato_last_order', JSON.stringify({ method: method, id: d.id, items: cart, sub: subtotal(), disc: discount(), code: codeStatus(code).ok ? codeStatus(code).code : '', ship: shipping(), total: subtotal() - discount() + shipping() })); } catch (e) {}
+          if (applied) { try { api({ action: 'redeem', code: applied.code, email: codeEmail, orderId: d.id, payerEmail: d.payer && d.payer.email_address }); } catch (e) {} }
+          try { sessionStorage.setItem('erato_last_order', JSON.stringify({ method: method, id: d.id, items: cart, sub: subtotal(), disc: discount(), code: codeStatus().ok ? codeStatus().code : '', ship: shipping(), total: subtotal() - discount() + shipping() })); } catch (e) {}
           cart = []; save(KEY, cart);
           window.location.href = 'thank-you.html';
         });
@@ -264,4 +279,5 @@
   }
 
   render();
+  if (code) applyCode();
 })();

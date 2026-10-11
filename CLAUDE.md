@@ -31,3 +31,4 @@ Prints: product-riviera.html (framed, frame.py renders assets/products/riviera-*
 
 - Display accent: .display class (Bodoni Moda, index intro heading only) is allowed; Jost stays everywhere else. Join band + footers use --night (#1a1640), not brown.
 - Deploy gotcha: .assetsignore must keep .git out of Workers assets (25 MiB per-file limit); keep videos under ~0.7 MB.
+- Discount codes: server-checked. Codes live in src/codes.js (Worker, hidden from visitors); used-counts in KV binding USED. Worker = src/worker.js, config = wrangler.jsonc (assets + /api/code). Friend codes EF-xxxxxx are single-use; EN10 is one use per email.
