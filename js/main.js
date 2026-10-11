@@ -47,14 +47,6 @@ document.querySelectorAll('.piece, .piece-solo, .product-detail').forEach(piece 
   });
 });
 
-// Add to bag (decorative — no cart backend yet)
-document.querySelectorAll('.add-to-bag').forEach(btn => {
-  const original = btn.textContent;
-  btn.addEventListener('click', () => {
-    btn.textContent = 'Added to Bag';
-    setTimeout(() => { btn.textContent = original; }, 2000);
-  });
-});
 
 // Newsletter form (in-memory only, no backend yet)
 const joinForm = document.getElementById('joinForm');

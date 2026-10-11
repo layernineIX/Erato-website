@@ -24,7 +24,7 @@ Pages: product-<slug>.html. Images: assets/tees/<key>-back.jpg, <key>-detail.jpg
 1. Add new tees/designs (needs artwork from Ali) → product page + collections card + home grid (+ rack if room).
 2. Prints page: real shop layout, product pages per print, sizes/prices.
 3. Front view with ERATO logo left chest (needs front blank photos from Ali).
-4. Checkout: "Add to Bag" is decorative; connect Stripe Payment Links (ask Ali).
+4. Checkout: DONE. js/cart.js = bag drawer (localStorage) + PayPal Smart Buttons (card guest checkout), live Client ID inside, shipping rates in REGIONS at top of cart.js (placeholders, Ali to confirm). Pages: shipping-returns, privacy, thank-you. Courier is "Coming soon"; product-riviera links to prints. PayPal account owner: Kelly (Ali's partner). Never ask for the PayPal Secret.
 5. Collections page: retire or group the 9 older pieces as "Archive".
 6. Mobile QA, delete duplicate folder "erato-website 2".
 Prints: product-riviera.html (framed, frame.py renders assets/products/riviera-*.jpg).

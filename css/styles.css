@@ -856,3 +856,52 @@ a.journal-card{display:block;color:inherit;text-decoration:none;}
 /* Footer links wrap on narrow screens (page was 130px too wide on phones) */
 .footer-links{flex-wrap:wrap;justify-content:center;gap:14px 24px;padding:0;list-style:none;}
 html,body{overflow-x:hidden;}
+
+/* ---------- BAG + CHECKOUT ---------- */
+.bag-btn{background:none;border:0;cursor:pointer;font-family:var(--font);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-left:28px;padding:8px 0;display:inline-flex;gap:6px;align-items:center;transition:color .4s var(--ease),opacity .2s;}
+.bag-btn:hover{opacity:.7;}
+.bag-count{min-width:20px;height:20px;border-radius:10px;border:1px solid currentColor;font-size:11px;letter-spacing:0;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;}
+.bag-btn.has .bag-count{background:var(--terra);border-color:var(--terra);color:#fff;}
+body.home .nav .bag-btn{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.45);}
+body.home .nav.scrolled .bag-btn{color:var(--ink);text-shadow:none;}
+@media (max-width:900px){.nav-logo{margin-right:auto;}.bag-btn{margin-left:0;margin-right:18px;}}
+.bag-overlay{position:fixed;inset:0;background:rgba(20,14,40,.5);z-index:300;}
+.bag{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--paper);color:var(--ink);z-index:301;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(0,0,0,.25);}
+.bag[hidden],.bag-overlay[hidden]{display:none;}
+body.bag-open{overflow:hidden;}
+.bag-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--line);}
+.bag-head h2{font-size:20px;font-weight:400;margin:0;}
+.bag-close{background:none;border:0;font-size:32px;line-height:1;cursor:pointer;color:inherit;padding:0 4px;}
+.bag-body{flex:1;overflow-y:auto;padding:8px 24px 28px;}
+.bag-empty{padding:48px 0;text-align:center;line-height:2;}
+.bag-empty a{text-decoration:underline;text-underline-offset:3px;}
+.bag-items{list-style:none;margin:0;padding:0;}
+.bag-item{display:grid;grid-template-columns:64px 1fr auto;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start;}
+.bag-item img,.bag-ph{width:64px;height:80px;object-fit:cover;background:var(--plaster2);}
+.bag-info{display:grid;gap:3px;min-width:0;}
+.bag-info strong{font-weight:500;font-size:15px;}
+.bag-info span{font-size:13px;opacity:.7;overflow-wrap:anywhere;}
+.bag-qty{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:14px;}
+.bag-qty button{background:none;border:1px solid var(--line);width:28px;height:28px;cursor:pointer;color:inherit;font-size:16px;line-height:1;}
+.bag-qty .bag-rm{width:auto;border:0;font-size:12px;text-decoration:underline;opacity:.6;margin-left:6px;}
+.bag-price{font-size:14px;white-space:nowrap;}
+.bag-label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.65;margin:22px 0 8px;}
+.bag-select{width:100%;padding:13px 12px;font-family:var(--font);font-size:14px;border:1px solid var(--ink);background:#fff;color:var(--ink);}
+.bag-sum{margin:18px 0 6px;display:grid;gap:8px;font-size:15px;}
+.bag-sum div{display:flex;justify-content:space-between;}
+.bag-sum dt,.bag-sum dd{margin:0;}
+.bag-sum .tot{font-weight:500;font-size:17px;border-top:1px solid var(--line);padding-top:12px;margin-top:4px;}
+.bag-hint{font-size:13px;opacity:.7;margin:10px 0 0;}
+#paypalBtns{margin-top:16px;min-height:10px;}
+#paypalBtns[hidden]{display:none;}
+.bag-err{background:#fbe9e5;color:#7a2a18;padding:10px 12px;font-size:13px;margin:12px 0 0;}
+.bag-note{font-size:12px;line-height:1.6;opacity:.65;margin:16px 0 0;}
+.bag-note a{text-decoration:underline;}
+.add-to-bag[disabled]{opacity:.45;cursor:not-allowed;}
+a.add-to-bag{text-decoration:none;}
+.doc{max-width:720px;margin:0 auto;padding:8px 24px 90px;font-size:16px;line-height:1.8;}
+.doc h2{font-size:22px;font-weight:400;margin:38px 0 10px;}
+.doc p,.doc ul{margin:0 0 16px;}.doc ul{padding-left:22px;}.doc li{margin-bottom:6px;}
+.doc a{color:var(--terra);text-decoration:underline;text-underline-offset:3px;}
+.doc table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:15px;}
+.doc th,.doc td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);}
