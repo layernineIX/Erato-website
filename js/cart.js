@@ -4,14 +4,15 @@
   var PAYPAL_CLIENT_ID = 'BAAXztDRMc1eYSxfBqXuVCAG414Js_lYKV0lxeTc-Pk0PkMAmkOo6TAlgrQcdASTV0jELPP2nPqqYyeF3A';
   var CURRENCY = 'USD';
   /* Shipping per order, by destination. Edit the numbers here. */
+  var FREE_OVER = 100; /* Standard shipping is free when the subtotal reaches this (USD) */
   var REGIONS = {
     my:   { label: 'Malaysia', std: 0, exp: 6 },
     id:   { label: 'Indonesia', std: 0, exp: 14 },
-    sea:  { label: 'Southeast Asia (Singapore, Thailand, Vietnam...)', std: 8, exp: 18 },
-    asia: { label: 'Rest of Asia', std: 14, exp: 26 },
-    eu:   { label: 'United Kingdom and Europe', std: 20, exp: 35 },
-    na:   { label: 'United States and Canada', std: 22, exp: 38 },
-    row:  { label: 'Rest of the world', std: 24, exp: 40 }
+    sea:  { label: 'Southeast Asia (Singapore, Thailand, Vietnam...)', std: 5, exp: 14 },
+    asia: { label: 'Rest of Asia', std: 8, exp: 20 },
+    eu:   { label: 'United Kingdom and Europe', std: 12, exp: 28 },
+    na:   { label: 'United States and Canada', std: 12, exp: 28 },
+    row:  { label: 'Rest of the world', std: 15, exp: 32 }
   };
   var SEA = 'SG TH VN PH BN KH LA MM TL'.split(' ');
   var ASIA = 'HK MO JP KR TW CN IN LK BD PK NP MV'.split(' ');
@@ -39,7 +40,8 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function subtotal() { return cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0); }
   function count() { return cart.reduce(function (s, i) { return s + i.qty; }, 0); }
-  function shipping() { return cart.length && region ? REGIONS[region][method] : 0; }
+  function rateFor(m) { return region ? (m === 'std' && subtotal() >= FREE_OVER ? 0 : REGIONS[region][m]) : 0; }
+  function shipping() { return cart.length && region ? rateFor(method) : 0; }
   function moneyFree(n) { return n === 0 ? 'Free' : money(n); }
 
   /* ---------- UI ---------- */
@@ -69,7 +71,7 @@
           '<label><input type="radio" name="bagMethod" value="exp"><span>Express, faster courier</span><b id="mExp"></b></label>' +
         '</fieldset>' +
         '<dl class="bag-sum"><div><dt>Subtotal</dt><dd id="bagSub"></dd></div><div><dt>Shipping</dt><dd id="bagShip"></dd></div><div class="tot"><dt>Total</dt><dd id="bagTot"></dd></div></dl>' +
-        '<p class="bag-hint" id="bagHint">Choose where we ship to, then pay by card or PayPal.</p>' +
+        '<p class="bag-hint" id="bagHint">Choose where we ship to, then pay by card or PayPal. Free standard shipping on orders over USD ' + FREE_OVER + '.</p>' +
         '<div id="paypalBtns"></div>' +
         '<p class="bag-err" id="bagErr" role="alert" hidden></p>' +
         '<p class="bag-note">Secure payment by PayPal. You do not need a PayPal account to pay by card: at the PayPal step, leave "Save info &amp; create your PayPal account" switched off. Import duties and taxes, if any, are paid by the buyer. <a href="shipping-returns.html">Shipping and returns</a></p>' +
@@ -97,7 +99,7 @@
     $('#bagSub').textContent = money(subtotal());
     $('#bagShip').textContent = region ? moneyFree(shipping()) : 'Choose destination';
     var ms = $('#bagMethods'); ms.hidden = !region;
-    if (region) { $('#mStd').textContent = moneyFree(REGIONS[region].std); $('#mExp').textContent = moneyFree(REGIONS[region].exp); }
+    if (region) { $('#mStd').textContent = moneyFree(rateFor('std')); $('#mExp').textContent = moneyFree(rateFor('exp')); }
     panel.querySelectorAll('input[name=bagMethod]').forEach(function (r) { r.checked = r.value === method; });
     $('#bagTot').textContent = money(subtotal() + shipping());
     hintEl.hidden = !!region; ppEl.hidden = !region;
