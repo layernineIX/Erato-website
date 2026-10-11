@@ -5,35 +5,42 @@
   var CURRENCY = 'USD';
   /* Shipping per order, by destination. Edit the numbers here. */
   var REGIONS = {
-    my:   { label: 'Malaysia', rate: 6 },
-    asia: { label: 'Singapore and rest of Asia', rate: 12 },
-    eu:   { label: 'United Kingdom and Europe', rate: 18 },
-    na:   { label: 'United States and Canada', rate: 20 },
-    row:  { label: 'Rest of the world', rate: 22 }
+    my:   { label: 'Malaysia', std: 0, exp: 6 },
+    id:   { label: 'Indonesia', std: 0, exp: 14 },
+    sea:  { label: 'Southeast Asia (Singapore, Thailand, Vietnam...)', std: 8, exp: 18 },
+    asia: { label: 'Rest of Asia', std: 14, exp: 26 },
+    eu:   { label: 'United Kingdom and Europe', std: 20, exp: 35 },
+    na:   { label: 'United States and Canada', std: 22, exp: 38 },
+    row:  { label: 'Rest of the world', std: 24, exp: 40 }
   };
-  var ASIA = 'SG TH ID PH VN BN KH LA MM HK MO JP KR TW CN IN LK BD PK NP MV'.split(' ');
+  var SEA = 'SG TH VN PH BN KH LA MM TL'.split(' ');
+  var ASIA = 'HK MO JP KR TW CN IN LK BD PK NP MV'.split(' ');
   var EU = 'GB IE AT BE BG HR CY CZ DK EE FI FR DE GR HU IT LV LT LU MT NL PL PT RO SK SI ES SE NO CH IS LI'.split(' ');
   function regionOf(cc) {
     if (cc === 'MY') return 'my';
+    if (cc === 'ID') return 'id';
+    if (SEA.indexOf(cc) > -1) return 'sea';
     if (ASIA.indexOf(cc) > -1) return 'asia';
     if (EU.indexOf(cc) > -1) return 'eu';
     if (cc === 'US' || cc === 'CA') return 'na';
     return 'row';
   }
 
-  var KEY = 'erato_cart', RKEY = 'erato_region';
+  var KEY = 'erato_cart', RKEY = 'erato_region', MKEY = 'erato_method';
   function load(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
   function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   var cart = load(KEY, []);
   var region = load(RKEY, '');
   if (!Array.isArray(cart)) cart = [];
   if (!REGIONS[region]) region = '';
+  var method = load(MKEY, 'std'); if (method !== 'exp') method = 'std';
 
   function money(n) { return 'USD ' + n.toFixed(2).replace(/\.00$/, ''); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function subtotal() { return cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0); }
   function count() { return cart.reduce(function (s, i) { return s + i.qty; }, 0); }
-  function shipping() { return cart.length && region ? REGIONS[region].rate : 0; }
+  function shipping() { return cart.length && region ? REGIONS[region][method] : 0; }
+  function moneyFree(n) { return n === 0 ? 'Free' : money(n); }
 
   /* ---------- UI ---------- */
   var nav = document.getElementById('nav');
@@ -47,7 +54,7 @@
   var panel = document.createElement('aside'); panel.className = 'bag'; panel.hidden = true;
   panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Your bag');
   var regionOpts = '<option value="">Choose where we ship to</option>' + Object.keys(REGIONS).map(function (k) {
-    return '<option value="' + k + '">' + REGIONS[k].label + ' (' + money(REGIONS[k].rate) + ')</option>';
+    return '<option value="' + k + '">' + REGIONS[k].label + '</option>';
   }).join('');
   panel.innerHTML =
     '<div class="bag-head"><h2>Your bag</h2><button type="button" class="bag-close" aria-label="Close bag">&times;</button></div>' +
@@ -57,11 +64,15 @@
       '<div class="bag-foot">' +
         '<label class="bag-label" for="bagRegion">Shipping to</label>' +
         '<select id="bagRegion" class="bag-select">' + regionOpts + '</select>' +
+        '<fieldset class="bag-methods" id="bagMethods"><legend class="bag-label">Delivery</legend>' +
+          '<label><input type="radio" name="bagMethod" value="std"><span>Standard, tracked</span><b id="mStd"></b></label>' +
+          '<label><input type="radio" name="bagMethod" value="exp"><span>Express, faster courier</span><b id="mExp"></b></label>' +
+        '</fieldset>' +
         '<dl class="bag-sum"><div><dt>Subtotal</dt><dd id="bagSub"></dd></div><div><dt>Shipping</dt><dd id="bagShip"></dd></div><div class="tot"><dt>Total</dt><dd id="bagTot"></dd></div></dl>' +
         '<p class="bag-hint" id="bagHint">Choose where we ship to, then pay by card or PayPal.</p>' +
         '<div id="paypalBtns"></div>' +
         '<p class="bag-err" id="bagErr" role="alert" hidden></p>' +
-        '<p class="bag-note">Secure payment by PayPal. You do not need a PayPal account to pay by card. Import duties and taxes, if any, are paid by the buyer. <a href="shipping-returns.html">Shipping and returns</a></p>' +
+        '<p class="bag-note">Secure payment by PayPal. You do not need a PayPal account to pay by card: at the PayPal step, leave "Save info &amp; create your PayPal account" switched off. Import duties and taxes, if any, are paid by the buyer. <a href="shipping-returns.html">Shipping and returns</a></p>' +
       '</div>' +
     '</div>';
   document.body.appendChild(overlay); document.body.appendChild(panel);
@@ -84,7 +95,10 @@
     }).join('');
     emptyEl.hidden = cart.length > 0; itemsEl.hidden = cart.length === 0; footEl.hidden = cart.length === 0;
     $('#bagSub').textContent = money(subtotal());
-    $('#bagShip').textContent = region ? money(shipping()) : 'Choose destination';
+    $('#bagShip').textContent = region ? moneyFree(shipping()) : 'Choose destination';
+    var ms = $('#bagMethods'); ms.hidden = !region;
+    if (region) { $('#mStd').textContent = moneyFree(REGIONS[region].std); $('#mExp').textContent = moneyFree(REGIONS[region].exp); }
+    panel.querySelectorAll('input[name=bagMethod]').forEach(function (r) { r.checked = r.value === method; });
     $('#bagTot').textContent = money(subtotal() + shipping());
     hintEl.hidden = !!region; ppEl.hidden = !region;
     if (cart.length && region) loadPayPal();
@@ -98,6 +112,9 @@
   panel.querySelector('.bag-close').addEventListener('click', close);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
   sel.addEventListener('change', function () { region = sel.value; save(RKEY, region); showErr(''); render(); });
+  panel.querySelectorAll('input[name=bagMethod]').forEach(function (r) {
+    r.addEventListener('change', function () { method = r.value; save(MKEY, method); showErr(''); render(); });
+  });
   itemsEl.addEventListener('click', function (e) {
     var b = e.target.closest('button[data-a]'); if (!b) return;
     var i = +b.dataset.i, a = b.dataset.a, it = cart[i]; if (!it) return;
@@ -162,7 +179,7 @@
     return {
       intent: 'CAPTURE',
       purchase_units: [{
-        description: 'ERATO order',
+        description: 'ERATO order. ' + (method === 'exp' ? 'Express' : 'Standard') + ' shipping to ' + REGIONS[region].label,
         amount: {
           currency_code: CURRENCY, value: (sub + ship).toFixed(2),
           breakdown: { item_total: { currency_code: CURRENCY, value: sub.toFixed(2) }, shipping: { currency_code: CURRENCY, value: ship.toFixed(2) } }
@@ -194,7 +211,7 @@
       },
       onApprove: function (data, actions) {
         return actions.order.capture().then(function (d) {
-          try { sessionStorage.setItem('erato_last_order', JSON.stringify({ id: d.id, items: cart, sub: subtotal(), ship: shipping(), total: subtotal() + shipping() })); } catch (e) {}
+          try { sessionStorage.setItem('erato_last_order', JSON.stringify({ method: method, id: d.id, items: cart, sub: subtotal(), ship: shipping(), total: subtotal() + shipping() })); } catch (e) {}
           cart = []; save(KEY, cart);
           window.location.href = 'thank-you.html';
         });
