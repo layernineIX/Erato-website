@@ -49,7 +49,7 @@
   var toggle = document.getElementById('navToggle');
   var bagBtn = document.createElement('button');
   bagBtn.className = 'bag-btn'; bagBtn.type = 'button'; bagBtn.setAttribute('aria-label', 'Open bag');
-  bagBtn.innerHTML = 'Bag <span class="bag-count" aria-hidden="true">0</span>';
+  bagBtn.innerHTML = '<svg class="bag-ico" viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 11h19l-1.4 15.2a1.6 1.6 0 0 1-1.6 1.4h-13a1.6 1.6 0 0 1-1.6-1.4L6.5 11z"/><path d="M11.5 14V9.5a4.5 4.5 0 0 1 9 0V14"/><path class="bag-fold" d="M6.8 15.6c6.2 2 12.2 2 18.4 0" opacity=".55"/></svg><span class="bag-count" aria-hidden="true">0</span>';
   if (nav) nav.insertBefore(bagBtn, toggle || null);
 
   var overlay = document.createElement('div'); overlay.className = 'bag-overlay'; overlay.hidden = true;
@@ -85,9 +85,11 @@
 
   function showErr(m) { errEl.textContent = m || ''; errEl.hidden = !m; }
 
+  var lastN = count();
   function render() {
     var n = count();
-    var badge = bagBtn.querySelector('.bag-count'); badge.textContent = n; bagBtn.classList.toggle('has', n > 0);
+    var badge = bagBtn.querySelector('.bag-count'); badge.textContent = n; bagBtn.classList.toggle('has', n > 0); bagBtn.setAttribute('aria-label', 'Open bag, ' + n + (n === 1 ? ' item' : ' items'));
+    if (n > lastN) { bagBtn.classList.remove('bump'); void bagBtn.offsetWidth; bagBtn.classList.add('bump'); } lastN = n;
     itemsEl.innerHTML = cart.map(function (i, idx) {
       return '<li class="bag-item">' + (i.img ? '<img src="' + esc(i.img) + '" alt="">' : '<span class="bag-ph"></span>') +
         '<div class="bag-info"><strong>' + esc(i.name) + '</strong><span>' + esc(i.opts) + '</span>' +

@@ -858,10 +858,6 @@ a.journal-card{display:block;color:inherit;text-decoration:none;}
 html,body{overflow-x:hidden;}
 
 /* ---------- BAG + CHECKOUT ---------- */
-.bag-btn{background:none;border:0;cursor:pointer;font-family:var(--font);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-left:28px;padding:8px 0;display:inline-flex;gap:6px;align-items:center;transition:color .4s var(--ease),opacity .2s;}
-.bag-btn:hover{opacity:.7;}
-.bag-count{min-width:20px;height:20px;border-radius:10px;border:1px solid currentColor;font-size:11px;letter-spacing:0;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;}
-.bag-btn.has .bag-count{background:var(--terra);border-color:var(--terra);color:#fff;}
 body.home .nav .bag-btn{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.45);}
 body.home .nav.scrolled .bag-btn{color:var(--ink);text-shadow:none;}
 @media (max-width:900px){.nav-logo{margin-right:auto;}.bag-btn{margin-left:0;margin-right:18px;}}
@@ -912,3 +908,18 @@ a.add-to-bag{text-decoration:none;}
 .bag-methods label:has(input:checked){border-color:var(--ink);}
 .bag-methods label span{flex:1;}
 .bag-methods[hidden]{display:none;}
+
+/* Bag icon */
+.bag-btn{position:relative;background:none;border:0;cursor:pointer;color:var(--ink);margin-left:26px;padding:6px;line-height:0;display:inline-flex;align-items:center;transition:color .4s var(--ease),transform .3s var(--ease);}
+.bag-btn:hover{transform:translateY(-2px);}
+.bag-btn:focus-visible{outline:2px solid var(--terra);outline-offset:3px;}
+.bag-ico{display:block;transition:transform .35s var(--ease);}
+.bag-btn:hover .bag-ico{transform:rotate(-4deg);}
+.bag-count{position:absolute;top:-1px;right:-3px;min-width:17px;height:17px;border-radius:9px;background:var(--terra);color:#fff;font-family:var(--font);font-size:10.5px;font-weight:500;letter-spacing:0;line-height:17px;text-align:center;padding:0 4px;transform:scale(0);transition:transform .3s var(--ease);}
+.bag-btn.has .bag-count{transform:scale(1);}
+.bag-btn.bump .bag-ico{animation:bagbump .5s var(--ease);}
+@keyframes bagbump{0%{transform:scale(1)}35%{transform:scale(1.22) rotate(-6deg)}70%{transform:scale(.96) rotate(3deg)}100%{transform:scale(1)}}
+body.home .nav .bag-btn{color:#fff;filter:drop-shadow(0 1px 4px rgba(0,0,0,.5));}
+body.home .nav.scrolled .bag-btn{color:var(--ink);filter:none;}
+@media (max-width:900px){.bag-btn{margin-left:0;margin-right:12px;}}
+@media (prefers-reduced-motion:reduce){.bag-btn,.bag-ico,.bag-count{transition:none;}.bag-btn.bump .bag-ico{animation:none;}.bag-btn:hover{transform:none;}}
