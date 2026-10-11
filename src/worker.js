@@ -65,11 +65,31 @@ async function handleJoin(request, env) {
   return json({ ok: true });
 }
 
+async function handleExport(request, env) {
+  const url = new URL(request.url);
+  const key = url.searchParams.get('key') || '';
+  if (!env.ADMIN_KEY || key.length !== env.ADMIN_KEY.length || key !== env.ADMIN_KEY) return new Response('Not found', { status: 404 });
+  const rows = ['email,signed_up'];
+  let cursor;
+  do {
+    const page = await env.USED.list({ prefix: 's:', cursor });
+    for (const k of page.keys) {
+      const when = (await env.USED.get(k.name)) || '';
+      rows.push(k.name.slice(2).replace(/"/g, '') + ',' + when);
+    }
+    cursor = page.list_complete ? undefined : page.cursor;
+  } while (cursor);
+  return new Response(rows.join('\n') + '\n', { headers: { 'content-type': 'text/csv; charset=utf-8', 'content-disposition': 'attachment; filename="erato-list.csv"', 'cache-control': 'no-store' } });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === '/api/code') {
       try { return await handleCode(request, env); } catch (e) { return json({ ok: false, error: 'Could not check the code. Try again.' }, 500); }
+    }
+    if (url.pathname === '/api/export') {
+      try { return await handleExport(request, env); } catch (e) { return new Response('Error', { status: 500 }); }
     }
     if (url.pathname === '/api/join') {
       try { return await handleJoin(request, env); } catch (e) { return json({ ok: false }, 500); }
