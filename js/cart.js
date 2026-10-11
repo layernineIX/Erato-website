@@ -6,8 +6,8 @@
   /* Discount codes. type: 'percent' or 'amount' (USD off). Optional: min (minimum subtotal), expires ('YYYY-MM-DD').
      Codes are visible to anyone who reads this file and cannot be limited to one use per person. */
   var CODES = {
-    WELCOME10: { type: 'percent', value: 10, label: '10% off' },
-    FRIENDS15: { type: 'percent', value: 15, label: '15% off' }
+    ERATO-NEW-7K4Q: { type: 'percent', value: 10, label: '10% off' },
+    ERATO-FRND-X9M2: { type: 'percent', value: 15, label: '15% off' }
   };
   /* Shipping per order, by destination. Edit the numbers here. */
   var FREE_OVER = 100; /* Standard shipping is free when the subtotal reaches this (USD) */
