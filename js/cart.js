@@ -74,7 +74,7 @@
   panel.innerHTML =
     '<div class="bag-head"><h2>Your bag</h2><button type="button" class="bag-close" aria-label="Close bag">&times;</button></div>' +
     '<div class="bag-body">' +
-      '<div class="bag-empty">Your bag is empty.<br><a href="collections.html">Browse the collection</a></div>' +
+      '<div class="bag-empty">Your bag is empty.<br><a href="/collections">Browse the collection</a></div>' +
       '<ul class="bag-items"></ul>' +
       '<div class="bag-foot">' +
         '<label class="bag-label" for="bagRegion">Shipping to</label>' +
@@ -91,7 +91,7 @@
         '<p class="bag-hint" id="bagHint">Choose where we ship to, then pay by card or PayPal. Free standard shipping on orders over USD ' + FREE_OVER + '.</p>' +
         '<div id="paypalBtns"></div>' +
         '<p class="bag-err" id="bagErr" role="alert" hidden></p>' +
-        '<p class="bag-note">Secure payment by PayPal. You do not need a PayPal account to pay by card: at the PayPal step, leave "Save info &amp; create your PayPal account" switched off. Import duties and taxes, if any, are paid by the buyer. <a href="shipping-returns.html">Shipping and returns</a></p>' +
+        '<p class="bag-note">Secure payment by PayPal. You do not need a PayPal account to pay by card: at the PayPal step, leave "Save info &amp; create your PayPal account" switched off. Import duties and taxes, if any, are paid by the buyer. <a href="/shipping-returns">Shipping and returns</a></p>' +
       '</div>' +
     '</div>';
   document.body.appendChild(overlay); document.body.appendChild(panel);
@@ -270,7 +270,7 @@
           if (applied) { try { api({ action: 'redeem', code: applied.code, email: codeEmail, orderId: d.id, payerEmail: d.payer && d.payer.email_address }); } catch (e) {} }
           try { sessionStorage.setItem('erato_last_order', JSON.stringify({ method: method, id: d.id, items: cart, sub: subtotal(), disc: discount(), code: codeStatus().ok ? codeStatus().code : '', ship: shipping(), total: subtotal() - discount() + shipping() })); } catch (e) {}
           cart = []; save(KEY, cart);
-          window.location.href = 'thank-you.html';
+          window.location.href = '/thank-you';
         });
       },
       onCancel: function () { showErr('Payment cancelled. Your bag is saved.'); },

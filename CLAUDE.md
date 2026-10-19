@@ -7,7 +7,8 @@ Owner: Ali (Layer Nine / ERATO). Currency: USD. Tees USD 44, totes USD 24, print
 - Keep Jost font and CSS variables in css/styles.css (warm tokens --plaster, --wood, --terra, --teal added at the bottom "SYNC" block).
 - Tees must look real, clean, chic. Accessibility: skip-to-shop link, prefers-reduced-motion.
 - Do NOT use Higgsfield or any image-generation tool. Ali generates images himself and uploads them.
-- Local preview: `python3 -m http.server 8767` from repo root (wardrobe hover needs http, not file://).
+- Local preview: `npx wrangler dev` from repo root (site uses clean URLs like /collections, which `python3 -m http.server` cannot serve; wardrobe hover needs http, not file://).
+- SEO conventions: internal links use clean paths (/collections, /product-bloom), never `.html`. Titles ≤60 chars, meta descriptions ≤155. Every new page needs canonical + og/twitter tags, JSON-LD, and an entry in sitemap.xml (bump lastmod when a page changes). Product-story subheadings are h2.
 
 ## Hero (index.html + js/wardrobe.js)
 Flow now: closed → click → doors open (NO zoom) → click an item (tee/tote/shoes) zooms to its group (tees / shelf / floor) → click item = pull-out dialog. Items: 7 tees, shoes (Loom, USD 275, 100% natural leather handmade; cow/python/crocodile options, black/navy/redbrown variants in assets/products/loom-*.jpg) and tote (Marble Study, USD 18, 38x42cm cotton) both on the shelf, real scale (~4.3 native px per cm). label.png values = (index+1)*23 (JS divides by 23); ITEMS order must match: tees 0-6, shoes 7, tote 8 (now Schéhérazade tote), framed print (Riviera) 9, Courier bag 10 (USD 320 placeholder). Layout: shoes on shelf in sun; tote + framed print stand in the bottom compartment (lit). Real scale ~4.3 native px/cm (hang18.py in scratchpad; shoes + Courier bag on shelf, tote 1.5x + framed print in bottom compartment). Rack overlay covers world y .17593–.7917 (h .61574).

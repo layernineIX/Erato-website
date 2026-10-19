@@ -22,7 +22,7 @@
     { k:'print', slug:'riviera', name:'Riviera', col:'Print', tone:'light', group:'floor', meta:'Framed print \u00b7 from USD 59', ar:0.726, alt:'Riviera framed print' },
     { k:'bag', slug:'courier', name:'Courier', col:'Bag', tone:'light', group:'shelf', meta:'Handmade leather briefcase \u00b7 USD 320', ar:1.0, alt:'Courier black leather briefcase, four views' }
   ]);
-  const href = t => 'product-' + t.slug + '.html';
+  const href = t => '/product-' + t.slug;
   const RACK = { x: 0.38542, y: 0.17593, w: 0.19792, h: 0.61574 };
   // zoom frames: centre (fraction of world) and region size (fraction of world width / height)
   const GROUPS = {

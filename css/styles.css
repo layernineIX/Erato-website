@@ -256,7 +256,7 @@ body.home .nav.scrolled .nav-toggle span{background:var(--ink);}
 .journal-card .tag{
   font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;display:block;margin-bottom:14px;
 }
-.journal-card h4{font-size:18px;font-weight:400;line-height:1.4;}
+.journal-card h2,.journal-card h4{font-size:18px;font-weight:400;line-height:1.4;text-align:left;margin-bottom:0;}
 
 /* ---------- JOIN ---------- */
 .join{
@@ -413,7 +413,7 @@ a.piece{text-decoration:none;color:inherit;display:flex;}
 }
 .add-to-bag:hover{opacity:.82;}
 .product-story{padding:56px 48px 130px;max-width:760px;border-top:1px solid var(--line);margin:0 48px;}
-.product-story h4{
+.product-story h2,.product-story h4{
   font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;
   margin-top:40px;margin-bottom:16px;
 }
@@ -988,3 +988,6 @@ body.home .nav.scrolled .bag-btn{color:var(--ink);filter:none;}
 .join .join-form[hidden]{display:none;}
 .join-inner{max-width:700px;}
 .join .join-title{text-wrap:balance;}
+
+/* Section headings that exist for structure and screen readers only */
+.visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
